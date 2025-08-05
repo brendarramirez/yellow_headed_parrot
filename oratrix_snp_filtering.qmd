@@ -223,3 +223,11 @@ miss.df
 
 # write.csv(miss.df, "~/Dropbox/08_yhpa_072025/yhpa_final_filtered_stats.csv")
 ```
+
+```{r thinning_vcf}
+#thinning final vcf for Locator analysis
+vcfR.trim.80.thin<-distance_thin(vcfR.trim.80, min.distance = 10000)
+vcfR.trim.80.thin
+
+# vcfR::write.vcf(vcfR.trim.80.thin, "~/Dropbox/08_yhpa_072025/yhpa_final_filtered_unlinked.vcf.gz")
+```
