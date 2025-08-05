@@ -1,0 +1,225 @@
+---
+title: "YHPA.filtering"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+## Yellow-headed Parrot (*Amazona oratrix*) SNP filtering and processing
+
+-   Mexican towhees SNPfiltR vignette: <https://devonderaad.github.io/towhees.uces/uce.processing/towhee.filt.html>
+
+-   SNPfiltR general package vignette: <https://github.com/DevonDeRaad/SNPfiltR>
+
+```{r load_libraries}
+library(SNPfiltR)
+library(vcfR)
+library(ggplot2)
+library(stringr)
+library(StAMPP)
+library(adegenet)
+library(tidyverse)
+```
+
+```{r read_in_vcf}
+#| output: false
+vcfR <- read.vcfR("~/Dropbox/08_yhpa_072025/updated.54.amazona.oratrix.snps.unfiltered.vcf")
+```
+
+```{r matching_sample_names}
+vcfR
+
+sample.info<-read.csv("~/Desktop/genomics/snp_calling/oratrix_nov2024/new_samples/clean_sample_info.csv")
+
+#check vcf colnames
+colnames(vcfR@gt)
+sample.info$Desired_Sequence_Name
+
+#fix sample names
+colnames(vcfR@gt)<-gsub(".sorted", "", colnames(vcfR@gt))
+colnames(vcfR@gt)
+
+#make sure sampling file matches vcf
+sample.info$Desired_Sequence_Name %in% colnames(vcfR@gt)[-1]
+colnames(vcfR@gt)[-1] %in% sample.info$Desired_Sequence_Name
+
+#reorder sampling file to match order of samples in vcf
+sample.info<-sample.info[match(colnames(vcfR@gt)[-1], sample.info$Desired_Sequence_Name),]
+sample.info$Desired_Sequence_Name == colnames(vcfR@gt)[-1]
+```
+
+```{r retain_biallelic_snps}
+vcfR<-filter_biallelic(vcfR)
+vcfR
+```
+
+```{r allele_balance_filter}
+vcfR<-filter_allele_balance(vcfR)
+vcfR
+```
+
+```{r depth_cutoffs}
+#set min and max depth cutoffs
+vcfR<-hard_filter(vcfR, depth = 3)
+vcfR<-max_depth(vcfR, maxdepth = 100)
+vcfR
+```
+
+```{r remove_invariant_snps}
+#remove invariant SNPs
+vcfR<-min_mac(vcfR, min.mac = 1)
+
+vcfR
+```
+
+```{r popmap}
+#create popmap
+popmap<-sample.info[sample.info$Desired_Sequence_Name %in% colnames(vcfR@gt)[-1],c(11,4)]
+colnames(popmap)<-c("id","pop")
+popmap$pop<-as.factor(popmap$pop)
+popmap
+
+#add in locality to sample name for PCA label
+popmap$new_id<-c("Honduras_ao_ANSP_90568",
+                 "Belize_BC_107",
+                 "Belize_BC_108",
+                 "Belize_BC_109",
+                 "Belize_BC_A112",
+                 "Belize_BC_A113",
+                 "Belize_BC_A114",
+                 "Belize_BC_A115",
+                 "Belize_BC_A116",
+                 "Belize_BC_A117",
+                 "Belize_BC_A118",
+                 "Tabasco_LSUMZ_23890",
+                 "Oaxaca_LSUMZ_33050",
+                 "Chiapas_LSUMZ_39731",
+                 "Colima_LSUMZ_43831",
+                 "Colima_LSUMZ_43832",
+                 "SCP_MLZ_1105",
+                 "Tamaulipas_MLZ_32244",
+                 "Veracruz_MLZ_35920",
+                 "Tamaulipas_MLZ_39530",
+                 "Tamaulipas_MLZ_40633",
+                 "Tamaulipas_MLZ_40634",
+                 "Tamaulipas_MLZ_40635",
+                 "San_Luis_Potosi_MLZ_41497",
+                 "Oaxaca_MLZ_45517",
+                 "Tamaulipas_MLZ_48333",
+                 "Guerrero_MLZ_50773",
+                 "Guerrero_MLZ_50774",
+                 "Guerrero_MLZ_50775",
+                 "Veracruz_MLZ_59507",
+                 "SCP_MLZ_70063",
+                 "SCP_MLZ_70074",
+                 "SCP_SP_1",
+                 "SCP_SP_2",
+                 "SCP_SP_3",
+                 "SCP_SP_4",
+                 "SCP_SP_5",
+                 "SCP_SP_6",
+                 "SCP_SP_7",
+                 "SCP_SP_8",
+                 "SCP_SP_831",
+                 "SCP_SP_832",
+                 "SCP_SP_833",
+                 "SCP_SP_834",
+                 "SCP_SP_835",
+                 "SCP_SP_836",
+                 "SCP_SP_837",
+                 "SCP_SP_838",
+                 "SCP_SP_839",
+                 "SCP_SP_840",
+                 "Tabasco_UMMZ_103984",
+                 "Michoacán_UMMZ_130517",
+                 "Nayarit_UMMZ_95618",
+                 "Nayarit_UMMZ_95619")
+
+popmap
+```
+
+```{r missing_data_pca}
+assess_missing_data_pca(vcfR = vcfR, popmap = popmap, thresholds = c(0.8, 0.9), clustering = FALSE)
+```
+
+```{r remove_outlier_missing_by_sample}
+#outliers: Tamaulipas_MLZ_32244 appears to be contaminated above - removed
+vcfR <- vcfR[, !colnames(vcfR@gt) %in% c("ao_MLZ_32244")]
+
+#subset popmap to only include retained individuals
+popmap<-popmap[popmap$id %in% colnames(vcfR@gt),]
+
+#check missing data
+miss<-missing_by_sample(vcfR)
+vcfR.trim<-missing_by_sample(vcfR, cutoff = 0.80)
+```
+
+```{r missing_by_snp}
+#check missing by SNP
+missing_by_snp(vcfR.trim)
+vcfR.trim.80<-missing_by_snp(vcfR.trim, cutoff = 0.8)
+vcfR.trim.80
+
+#remove singletons
+vcfR.trim.80<-min_mac(vcfR.trim.80, min.mac = 2)
+vcfR.trim.80
+
+# vcfR::write.vcf(vcfR.trim.80, "~/Dropbox/08_yhpa_072025/yhpa_final_filtered.vcf.gz")
+```
+
+```{r}
+#labeled pca
+#subset popmap to only include retained individuals
+popmap<-popmap[popmap$id %in% colnames(vcfR.trim.80@gt),]
+
+#convert each to genlight
+gena<-vcfR2genlight(vcfR.trim.80)
+#perform PCA
+di.pca<-glPca(gena, nf=4)
+#isolate PCA scores as a dataframe
+di.pca.scores<-as.data.frame(di.pca$scores)
+#reorder sampling file to match alphabetical order
+popmap<-popmap %>% slice(order(factor(id, levels = rownames(di.pca.scores))))
+#check that they all match
+rownames(di.pca.scores) == popmap$id 
+
+#add in percent variance explained
+var_frac <- di.pca$eig/sum(di.pca$eig)
+
+#pca - Figure 1 (with map) - add numbered localities
+ggplot(di.pca.scores, aes(x=PC1, y=PC2)) +
+  geom_point(aes(fill=popmap$pop), pch=21, size=2) +
+  ggrepel::geom_text_repel(aes(label = popmap$new_id)) +
+  xlab(paste0("PC1, ", round(var_frac[1] * 100, 2), "% variance explained")) + 
+  ylab(paste0("PC2, ", round(var_frac[2] * 100, 2), "% variance explained")) + 
+  theme_classic()
+```
+
+```{r splitstree_80}
+pop(gena)<-gena@ind.names
+sample.div.80 <- stamppNeisD(gena, pop = FALSE)
+plot(sample.div.80)
+
+#need to rename samples for splitstree
+rownames(sample.div.80)
+rownames(sample.div.80)<-gsub("ao_", "", rownames(sample.div.80))
+
+#export for splitstree
+stamppPhylip(distance.mat=sample.div.80, file="~/Dropbox/08_yhpa_072025/splitstree/oratrix.80.splitstree.txt")
+
+knitr::include_graphics("~/Dropbox/08_yhpa_072025/splitstree/oratrix.80.splitstree.png")
+```
+
+```{r final_filtered_vcf}
+vcfR.trim.80
+miss<-missing_by_sample(vcfR.trim.80)
+miss.df<-miss$unfiltered.stats
+miss.df
+
+# write.csv(miss.df, "~/Dropbox/08_yhpa_072025/yhpa_final_filtered_stats.csv")
+```
