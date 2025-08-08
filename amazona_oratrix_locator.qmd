@@ -116,7 +116,7 @@ locator --vcf /home/ramirezb/oratrix_locator/data/tamaulipas.mac2.unlinked.vcf.g
 setwd("~/Dropbox/08_yhpa_072025/locator/")
 
 #all data
-all_data<-read_delim("~/Desktop/oratrix_locator/all_samples_sample_data.txt")
+all_data<-read_delim("~/Desktop/oratrix_locator/yhpa_final_samples.txt")
 
 locator_test<-all_data[all_data$sampleID %in% c("ao_MLZ_39530"),]
 locator_test$y<-as.numeric(locator_test$y)

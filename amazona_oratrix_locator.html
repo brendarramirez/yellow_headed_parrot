@@ -3393,10 +3393,10 @@ locator --vcf /home/ramirezb/oratrix_locator/data/tamaulipas.mac2.unlinked.vcf.g
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Dropbox/08_yhpa_072025/locator/&quot;</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#all data</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>all_data<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;~/Desktop/oratrix_locator/all_samples_sample_data.txt&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>all_data<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;~/Desktop/oratrix_locator/yhpa_final_samples.txt&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 54 Columns: 3
+<pre><code>Rows: 53 Columns: 3
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: &quot;\t&quot;
 chr (1): sampleID
@@ -4694,7 +4694,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb94-126"><a href="#cb94-126" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Dropbox/08_yhpa_072025/locator/&quot;</span>)</span>
 <span id="cb94-127"><a href="#cb94-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb94-128"><a href="#cb94-128" aria-hidden="true" tabindex="-1"></a><span class="co">#all data</span></span>
-<span id="cb94-129"><a href="#cb94-129" aria-hidden="true" tabindex="-1"></a>all_data<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;~/Desktop/oratrix_locator/all_samples_sample_data.txt&quot;</span>)</span>
+<span id="cb94-129"><a href="#cb94-129" aria-hidden="true" tabindex="-1"></a>all_data<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;~/Desktop/oratrix_locator/yhpa_final_samples.txt&quot;</span>)</span>
 <span id="cb94-130"><a href="#cb94-130" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb94-131"><a href="#cb94-131" aria-hidden="true" tabindex="-1"></a>locator_test<span class="ot">&lt;-</span>all_data[all_data<span class="sc">$</span>sampleID <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ao_MLZ_39530&quot;</span>),]</span>
 <span id="cb94-132"><a href="#cb94-132" aria-hidden="true" tabindex="-1"></a>locator_test<span class="sc">$</span>y<span class="ot">&lt;-</span><span class="fu">as.numeric</span>(locator_test<span class="sc">$</span>y)</span>
