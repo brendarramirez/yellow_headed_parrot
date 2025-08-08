@@ -3086,8 +3086,12 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#running-locator-on-yhpa-samples" id="toc-running-locator-on-yhpa-samples" class="nav-link active" data-scroll-target="#running-locator-on-yhpa-samples"><span class="header-section-number">1</span> Running Locator on YHPA Samples</a></li>
   <li><a href="#testing-locator---trying-to-predict-locality-of-ao_mlz_39530-tamaulipas" id="toc-testing-locator---trying-to-predict-locality-of-ao_mlz_39530-tamaulipas" class="nav-link" data-scroll-target="#testing-locator---trying-to-predict-locality-of-ao_mlz_39530-tamaulipas"><span class="header-section-number">2</span> Testing locator - trying to predict locality of ao_MLZ_39530 (Tamaulipas)</a></li>
-  <li><a href="#predicting-yhpa-samples" id="toc-predicting-yhpa-samples" class="nav-link" data-scroll-target="#predicting-yhpa-samples"><span class="header-section-number">3</span> Predicting yhpa samples</a></li>
-  <li><a href="#predicting-southern-california-samples" id="toc-predicting-southern-california-samples" class="nav-link" data-scroll-target="#predicting-southern-california-samples"><span class="header-section-number">4</span> Predicting Southern California samples</a></li>
+  <li><a href="#plotting-tamaulipas-ao_mlz_39530-predictions" id="toc-plotting-tamaulipas-ao_mlz_39530-predictions" class="nav-link" data-scroll-target="#plotting-tamaulipas-ao_mlz_39530-predictions"><span class="header-section-number">3</span> Plotting Tamaulipas ao_MLZ_39530 predictions</a></li>
+  <li><a href="#predicting-yhpa-samples" id="toc-predicting-yhpa-samples" class="nav-link" data-scroll-target="#predicting-yhpa-samples"><span class="header-section-number">4</span> Predicting yhpa samples</a></li>
+  <li><a href="#plotting-confiscated-yhpa-predictions" id="toc-plotting-confiscated-yhpa-predictions" class="nav-link" data-scroll-target="#plotting-confiscated-yhpa-predictions"><span class="header-section-number">5</span> Plotting confiscated YHPA predictions</a></li>
+  <li><a href="#predicting-southern-california-samples" id="toc-predicting-southern-california-samples" class="nav-link" data-scroll-target="#predicting-southern-california-samples"><span class="header-section-number">6</span> Predicting Southern California samples</a></li>
+  <li><a href="#plotting-southern-california-parrot-samples" id="toc-plotting-southern-california-parrot-samples" class="nav-link" data-scroll-target="#plotting-southern-california-parrot-samples"><span class="header-section-number">7</span> Plotting Southern California Parrot samples</a></li>
+  <li><a href="#clean-plots-of-confiscated-yhpa-and-southern-california-samples" id="toc-clean-plots-of-confiscated-yhpa-and-southern-california-samples" class="nav-link" data-scroll-target="#clean-plots-of-confiscated-yhpa-and-southern-california-samples"><span class="header-section-number">8</span> Clean plots of confiscated YHPA and Southern California Samples</a></li>
   </ul>
 </nav>
 </div>
@@ -3467,8 +3471,9 @@ Geodetic CRS:  WGS 84</code></pre>
 </details>
 </div>
 </section>
-<section id="plotting-predictions" class="level4" data-number="2.0.9">
-<h4 data-number="2.0.9" class="anchored" data-anchor-id="plotting-predictions"><span class="header-section-number">2.0.9</span> Plotting predictions</h4>
+</section>
+<section id="plotting-tamaulipas-ao_mlz_39530-predictions" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="plotting-tamaulipas-ao_mlz_39530-predictions"><span class="header-section-number">3</span> Plotting Tamaulipas ao_MLZ_39530 predictions</h2>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -3554,9 +3559,8 @@ Removed 1 row containing missing values or values outside the scale range
 </div>
 </div>
 </section>
-</section>
-<section id="predicting-yhpa-samples" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="predicting-yhpa-samples"><span class="header-section-number">3</span> Predicting yhpa samples</h2>
+<section id="predicting-yhpa-samples" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="predicting-yhpa-samples"><span class="header-section-number">4</span> Predicting yhpa samples</h2>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -3685,6 +3689,9 @@ locator --vcf /home/ramirezb/oratrix_locator/data/yhpa.mac2.unlinked.vcf.gz --sa
 <span id="cb63-25"><a href="#cb63-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_y =</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="plotting-confiscated-yhpa-predictions" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="plotting-confiscated-yhpa-predictions"><span class="header-section-number">5</span> Plotting confiscated YHPA predictions</h2>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -3766,8 +3773,8 @@ locator --vcf /home/ramirezb/oratrix_locator/data/yhpa.mac2.unlinked.vcf.gz --sa
 </div>
 </div>
 </section>
-<section id="predicting-southern-california-samples" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="predicting-southern-california-samples"><span class="header-section-number">4</span> Predicting Southern California samples</h2>
+<section id="predicting-southern-california-samples" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="predicting-southern-california-samples"><span class="header-section-number">6</span> Predicting Southern California samples</h2>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -3926,6 +3933,9 @@ locator --vcf /home/ramirezb/oratrix_locator/data/socal.mac2.unlinked.vcf.gz --s
 <span id="cb85-25"><a href="#cb85-25" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_y =</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="plotting-southern-california-parrot-samples" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="plotting-southern-california-parrot-samples"><span class="header-section-number">7</span> Plotting Southern California Parrot samples</h2>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4006,8 +4016,9 @@ locator --vcf /home/ramirezb/oratrix_locator/data/socal.mac2.unlinked.vcf.gz --s
 </div>
 </div>
 </div>
-<section id="clean-plots-for-manuscript" class="level4" data-number="4.0.1">
-<h4 data-number="4.0.1" class="anchored" data-anchor-id="clean-plots-for-manuscript"><span class="header-section-number">4.0.1</span> Clean plots for manuscript</h4>
+</section>
+<section id="clean-plots-of-confiscated-yhpa-and-southern-california-samples" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="clean-plots-of-confiscated-yhpa-and-southern-california-samples"><span class="header-section-number">8</span> Clean plots of confiscated YHPA and Southern California Samples</h2>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4090,7 +4101,6 @@ locator --vcf /home/ramirezb/oratrix_locator/data/socal.mac2.unlinked.vcf.gz --s
 </div>
 <!-- -->
 
-</section>
 </section>
 
 </main>
@@ -4734,7 +4744,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb94-180"><a href="#cb94-180" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_y =</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb94-181"><a href="#cb94-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb94-182"><a href="#cb94-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-183"><a href="#cb94-183" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Plotting predictions</span></span>
+<span id="cb94-183"><a href="#cb94-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plotting Tamaulipas ao_MLZ_39530 predictions</span></span>
 <span id="cb94-184"><a href="#cb94-184" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb94-187"><a href="#cb94-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb94-188"><a href="#cb94-188" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 200 predictions</span></span>
@@ -4864,259 +4874,263 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb94-318"><a href="#cb94-318" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_y =</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
 <span id="cb94-319"><a href="#cb94-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb94-320"><a href="#cb94-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-323"><a href="#cb94-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb94-324"><a href="#cb94-324" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 200 predictions</span></span>
-<span id="cb94-325"><a href="#cb94-325" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb94-326"><a href="#cb94-326" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-327"><a href="#cb94-327" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-328"><a href="#cb94-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-329"><a href="#cb94-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_all_preds, <span class="fu">aes</span>(<span class="at">x =</span>y, <span class="at">y =</span>x, <span class="at">col =</span> <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span>), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb94-330"><a href="#cb94-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 200 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-331"><a href="#cb94-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-332"><a href="#cb94-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-333"><a href="#cb94-333" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(</span>
-<span id="cb94-334"><a href="#cb94-334" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb94-335"><a href="#cb94-335" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
-<span id="cb94-336"><a href="#cb94-336" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
-<span id="cb94-337"><a href="#cb94-337" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
-<span id="cb94-338"><a href="#cb94-338" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
-<span id="cb94-339"><a href="#cb94-339" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb94-340"><a href="#cb94-340" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-341"><a href="#cb94-341" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb94-342"><a href="#cb94-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb94-343"><a href="#cb94-343" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb94-344"><a href="#cb94-344" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb94-345"><a href="#cb94-345" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Confiscated YHPA Predictions&quot;</span>,</span>
-<span id="cb94-346"><a href="#cb94-346" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb94-347"><a href="#cb94-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-348"><a href="#cb94-348" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 95% boostrap ellipse</span></span>
-<span id="cb94-349"><a href="#cb94-349" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb94-350"><a href="#cb94-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-351"><a href="#cb94-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-352"><a href="#cb94-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-353"><a href="#cb94-353" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
-<span id="cb94-354"><a href="#cb94-354" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ellipse around bootstrapped points</span></span>
-<span id="cb94-355"><a href="#cb94-355" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">data =</span> yhpa_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
-<span id="cb94-356"><a href="#cb94-356" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
-<span id="cb94-357"><a href="#cb94-357" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-358"><a href="#cb94-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 200 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-359"><a href="#cb94-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-360"><a href="#cb94-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-361"><a href="#cb94-361" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(</span>
-<span id="cb94-362"><a href="#cb94-362" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb94-363"><a href="#cb94-363" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
-<span id="cb94-364"><a href="#cb94-364" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
-<span id="cb94-365"><a href="#cb94-365" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
-<span id="cb94-366"><a href="#cb94-366" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
-<span id="cb94-367"><a href="#cb94-367" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb94-368"><a href="#cb94-368" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-369"><a href="#cb94-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb94-370"><a href="#cb94-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb94-371"><a href="#cb94-371" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb94-372"><a href="#cb94-372" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb94-373"><a href="#cb94-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Confiscated YHPA Predictions&quot;</span>,</span>
-<span id="cb94-374"><a href="#cb94-374" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb94-375"><a href="#cb94-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb94-376"><a href="#cb94-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-377"><a href="#cb94-377" aria-hidden="true" tabindex="-1"></a><span class="fu">## Predicting Southern California samples</span></span>
+<span id="cb94-321"><a href="#cb94-321" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plotting confiscated YHPA predictions</span></span>
+<span id="cb94-322"><a href="#cb94-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-325"><a href="#cb94-325" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb94-326"><a href="#cb94-326" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 200 predictions</span></span>
+<span id="cb94-327"><a href="#cb94-327" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-328"><a href="#cb94-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-329"><a href="#cb94-329" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-330"><a href="#cb94-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-331"><a href="#cb94-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_all_preds, <span class="fu">aes</span>(<span class="at">x =</span>y, <span class="at">y =</span>x, <span class="at">col =</span> <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span>), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb94-332"><a href="#cb94-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 200 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-333"><a href="#cb94-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-334"><a href="#cb94-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-335"><a href="#cb94-335" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(</span>
+<span id="cb94-336"><a href="#cb94-336" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb94-337"><a href="#cb94-337" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
+<span id="cb94-338"><a href="#cb94-338" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
+<span id="cb94-339"><a href="#cb94-339" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
+<span id="cb94-340"><a href="#cb94-340" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
+<span id="cb94-341"><a href="#cb94-341" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb94-342"><a href="#cb94-342" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-343"><a href="#cb94-343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb94-344"><a href="#cb94-344" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-345"><a href="#cb94-345" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb94-346"><a href="#cb94-346" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb94-347"><a href="#cb94-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Confiscated YHPA Predictions&quot;</span>,</span>
+<span id="cb94-348"><a href="#cb94-348" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb94-349"><a href="#cb94-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-350"><a href="#cb94-350" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 95% boostrap ellipse</span></span>
+<span id="cb94-351"><a href="#cb94-351" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-352"><a href="#cb94-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-353"><a href="#cb94-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-354"><a href="#cb94-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-355"><a href="#cb94-355" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
+<span id="cb94-356"><a href="#cb94-356" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ellipse around bootstrapped points</span></span>
+<span id="cb94-357"><a href="#cb94-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">data =</span> yhpa_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
+<span id="cb94-358"><a href="#cb94-358" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb94-359"><a href="#cb94-359" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-360"><a href="#cb94-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 200 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-361"><a href="#cb94-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> yhpa_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-362"><a href="#cb94-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-363"><a href="#cb94-363" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(</span>
+<span id="cb94-364"><a href="#cb94-364" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb94-365"><a href="#cb94-365" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
+<span id="cb94-366"><a href="#cb94-366" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
+<span id="cb94-367"><a href="#cb94-367" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
+<span id="cb94-368"><a href="#cb94-368" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
+<span id="cb94-369"><a href="#cb94-369" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb94-370"><a href="#cb94-370" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-371"><a href="#cb94-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb94-372"><a href="#cb94-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-373"><a href="#cb94-373" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb94-374"><a href="#cb94-374" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb94-375"><a href="#cb94-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Confiscated YHPA Predictions&quot;</span>,</span>
+<span id="cb94-376"><a href="#cb94-376" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb94-377"><a href="#cb94-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb94-378"><a href="#cb94-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-381"><a href="#cb94-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb94-382"><a href="#cb94-382" aria-hidden="true" tabindex="-1"></a><span class="co">#we want to find localities of southern california samples (ao_MLZ_1105, ao_MLZ_70063, and ao_MLZ_70074)</span></span>
-<span id="cb94-383"><a href="#cb94-383" aria-hidden="true" tabindex="-1"></a><span class="co">#removing confiscated scp samples because we don&#39;t have their localities</span></span>
-<span id="cb94-384"><a href="#cb94-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-385"><a href="#cb94-385" aria-hidden="true" tabindex="-1"></a>socal.vcf<span class="ot">&lt;-</span>(vcfR)[, <span class="sc">!</span><span class="fu">colnames</span>((vcfR)<span class="sc">@</span>gt) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ao_SP_1&quot;</span>, <span class="co">#all SP samples confiscated</span></span>
-<span id="cb94-386"><a href="#cb94-386" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_2&quot;</span>,</span>
-<span id="cb94-387"><a href="#cb94-387" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_3&quot;</span>,</span>
-<span id="cb94-388"><a href="#cb94-388" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_4&quot;</span>,</span>
-<span id="cb94-389"><a href="#cb94-389" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_5&quot;</span>,</span>
-<span id="cb94-390"><a href="#cb94-390" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_6&quot;</span>,</span>
-<span id="cb94-391"><a href="#cb94-391" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_7&quot;</span>,</span>
-<span id="cb94-392"><a href="#cb94-392" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_8&quot;</span>,</span>
-<span id="cb94-393"><a href="#cb94-393" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_831&quot;</span>,</span>
-<span id="cb94-394"><a href="#cb94-394" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_832&quot;</span>,</span>
-<span id="cb94-395"><a href="#cb94-395" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_833&quot;</span>,</span>
-<span id="cb94-396"><a href="#cb94-396" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_834&quot;</span>,</span>
-<span id="cb94-397"><a href="#cb94-397" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_835&quot;</span>,</span>
-<span id="cb94-398"><a href="#cb94-398" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_836&quot;</span>,</span>
-<span id="cb94-399"><a href="#cb94-399" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_837&quot;</span>,</span>
-<span id="cb94-400"><a href="#cb94-400" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_838&quot;</span>,</span>
-<span id="cb94-401"><a href="#cb94-401" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_839&quot;</span>,</span>
-<span id="cb94-402"><a href="#cb94-402" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_840&quot;</span>)]</span>
-<span id="cb94-403"><a href="#cb94-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-404"><a href="#cb94-404" aria-hidden="true" tabindex="-1"></a>socal.vcf</span>
-<span id="cb94-405"><a href="#cb94-405" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb94-406"><a href="#cb94-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-409"><a href="#cb94-409" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb94-410"><a href="#cb94-410" aria-hidden="true" tabindex="-1"></a><span class="co">#subset popmap to only include retained individuals</span></span>
-<span id="cb94-411"><a href="#cb94-411" aria-hidden="true" tabindex="-1"></a>popmap<span class="ot">&lt;-</span>popmap[popmap<span class="sc">$</span>id <span class="sc">%in%</span> <span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt),]</span>
-<span id="cb94-412"><a href="#cb94-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-413"><a href="#cb94-413" aria-hidden="true" tabindex="-1"></a><span class="co">#make sure sampling file matches vcf</span></span>
-<span id="cb94-414"><a href="#cb94-414" aria-hidden="true" tabindex="-1"></a>popmap<span class="sc">$</span>id <span class="sc">%in%</span> <span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb94-415"><a href="#cb94-415" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">%in%</span> popmap<span class="sc">$</span>id</span>
-<span id="cb94-416"><a href="#cb94-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-417"><a href="#cb94-417" aria-hidden="true" tabindex="-1"></a><span class="co">#reorder sampling file to match order of samples in vcf</span></span>
-<span id="cb94-418"><a href="#cb94-418" aria-hidden="true" tabindex="-1"></a>sample.info<span class="ot">&lt;-</span>popmap[<span class="fu">match</span>(<span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>], popmap<span class="sc">$</span>id),]</span>
-<span id="cb94-419"><a href="#cb94-419" aria-hidden="true" tabindex="-1"></a>popmap<span class="sc">$</span>id <span class="sc">==</span> <span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb94-420"><a href="#cb94-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-421"><a href="#cb94-421" aria-hidden="true" tabindex="-1"></a>socal.vcf.mac2<span class="ot">&lt;-</span><span class="fu">min_mac</span>(socal.vcf, <span class="at">min.mac =</span> <span class="dv">2</span>)</span>
+<span id="cb94-379"><a href="#cb94-379" aria-hidden="true" tabindex="-1"></a><span class="fu">## Predicting Southern California samples</span></span>
+<span id="cb94-380"><a href="#cb94-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-383"><a href="#cb94-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb94-384"><a href="#cb94-384" aria-hidden="true" tabindex="-1"></a><span class="co">#we want to find localities of southern california samples (ao_MLZ_1105, ao_MLZ_70063, and ao_MLZ_70074)</span></span>
+<span id="cb94-385"><a href="#cb94-385" aria-hidden="true" tabindex="-1"></a><span class="co">#removing confiscated scp samples because we don&#39;t have their localities</span></span>
+<span id="cb94-386"><a href="#cb94-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-387"><a href="#cb94-387" aria-hidden="true" tabindex="-1"></a>socal.vcf<span class="ot">&lt;-</span>(vcfR)[, <span class="sc">!</span><span class="fu">colnames</span>((vcfR)<span class="sc">@</span>gt) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ao_SP_1&quot;</span>, <span class="co">#all SP samples confiscated</span></span>
+<span id="cb94-388"><a href="#cb94-388" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_2&quot;</span>,</span>
+<span id="cb94-389"><a href="#cb94-389" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_3&quot;</span>,</span>
+<span id="cb94-390"><a href="#cb94-390" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_4&quot;</span>,</span>
+<span id="cb94-391"><a href="#cb94-391" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_5&quot;</span>,</span>
+<span id="cb94-392"><a href="#cb94-392" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_6&quot;</span>,</span>
+<span id="cb94-393"><a href="#cb94-393" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_7&quot;</span>,</span>
+<span id="cb94-394"><a href="#cb94-394" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_8&quot;</span>,</span>
+<span id="cb94-395"><a href="#cb94-395" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_831&quot;</span>,</span>
+<span id="cb94-396"><a href="#cb94-396" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_832&quot;</span>,</span>
+<span id="cb94-397"><a href="#cb94-397" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_833&quot;</span>,</span>
+<span id="cb94-398"><a href="#cb94-398" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_834&quot;</span>,</span>
+<span id="cb94-399"><a href="#cb94-399" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_835&quot;</span>,</span>
+<span id="cb94-400"><a href="#cb94-400" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_836&quot;</span>,</span>
+<span id="cb94-401"><a href="#cb94-401" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_837&quot;</span>,</span>
+<span id="cb94-402"><a href="#cb94-402" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_838&quot;</span>,</span>
+<span id="cb94-403"><a href="#cb94-403" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_839&quot;</span>,</span>
+<span id="cb94-404"><a href="#cb94-404" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">&quot;ao_SP_840&quot;</span>)]</span>
+<span id="cb94-405"><a href="#cb94-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-406"><a href="#cb94-406" aria-hidden="true" tabindex="-1"></a>socal.vcf</span>
+<span id="cb94-407"><a href="#cb94-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb94-408"><a href="#cb94-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-411"><a href="#cb94-411" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb94-412"><a href="#cb94-412" aria-hidden="true" tabindex="-1"></a><span class="co">#subset popmap to only include retained individuals</span></span>
+<span id="cb94-413"><a href="#cb94-413" aria-hidden="true" tabindex="-1"></a>popmap<span class="ot">&lt;-</span>popmap[popmap<span class="sc">$</span>id <span class="sc">%in%</span> <span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt),]</span>
+<span id="cb94-414"><a href="#cb94-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-415"><a href="#cb94-415" aria-hidden="true" tabindex="-1"></a><span class="co">#make sure sampling file matches vcf</span></span>
+<span id="cb94-416"><a href="#cb94-416" aria-hidden="true" tabindex="-1"></a>popmap<span class="sc">$</span>id <span class="sc">%in%</span> <span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb94-417"><a href="#cb94-417" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>] <span class="sc">%in%</span> popmap<span class="sc">$</span>id</span>
+<span id="cb94-418"><a href="#cb94-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-419"><a href="#cb94-419" aria-hidden="true" tabindex="-1"></a><span class="co">#reorder sampling file to match order of samples in vcf</span></span>
+<span id="cb94-420"><a href="#cb94-420" aria-hidden="true" tabindex="-1"></a>sample.info<span class="ot">&lt;-</span>popmap[<span class="fu">match</span>(<span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>], popmap<span class="sc">$</span>id),]</span>
+<span id="cb94-421"><a href="#cb94-421" aria-hidden="true" tabindex="-1"></a>popmap<span class="sc">$</span>id <span class="sc">==</span> <span class="fu">colnames</span>(socal.vcf<span class="sc">@</span>gt)[<span class="sc">-</span><span class="dv">1</span>]</span>
 <span id="cb94-422"><a href="#cb94-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-423"><a href="#cb94-423" aria-hidden="true" tabindex="-1"></a><span class="co"># vcfR:: write.vcf(socal.vcf, &quot;~/Dropbox/08_yhpa_072025/locator/socal_run/socal.mac2.unlinked.vcf.gz&quot;)</span></span>
+<span id="cb94-423"><a href="#cb94-423" aria-hidden="true" tabindex="-1"></a>socal.vcf.mac2<span class="ot">&lt;-</span><span class="fu">min_mac</span>(socal.vcf, <span class="at">min.mac =</span> <span class="dv">2</span>)</span>
 <span id="cb94-424"><a href="#cb94-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-425"><a href="#cb94-425" aria-hidden="true" tabindex="-1"></a>socal.vcf.mac2</span>
+<span id="cb94-425"><a href="#cb94-425" aria-hidden="true" tabindex="-1"></a><span class="co"># vcfR:: write.vcf(socal.vcf, &quot;~/Dropbox/08_yhpa_072025/locator/socal_run/socal.mac2.unlinked.vcf.gz&quot;)</span></span>
 <span id="cb94-426"><a href="#cb94-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-427"><a href="#cb94-427" aria-hidden="true" tabindex="-1"></a><span class="co">#sample data</span></span>
-<span id="cb94-428"><a href="#cb94-428" aria-hidden="true" tabindex="-1"></a>sample_data<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;~/Dropbox/08_yhpa_072025/locator/socal_run/sample_data_socal.txt&quot;</span>)</span>
-<span id="cb94-429"><a href="#cb94-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb94-430"><a href="#cb94-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-431"><a href="#cb94-431" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
-<span id="cb94-432"><a href="#cb94-432" aria-hidden="true" tabindex="-1"></a><span class="in">#!/bin/sh</span></span>
-<span id="cb94-433"><a href="#cb94-433" aria-hidden="true" tabindex="-1"></a><span class="in">#</span></span>
-<span id="cb94-434"><a href="#cb94-434" aria-hidden="true" tabindex="-1"></a><span class="in">#SBATCH --job-name=locator_yhpa             # Job Name</span></span>
-<span id="cb94-435"><a href="#cb94-435" aria-hidden="true" tabindex="-1"></a><span class="in">#SBATCH --partition=mlz-medium         # Name of the Slurm partition used</span></span>
-<span id="cb94-436"><a href="#cb94-436" aria-hidden="true" tabindex="-1"></a><span class="in">#SBATCH --nodelist=n028</span></span>
-<span id="cb94-437"><a href="#cb94-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-438"><a href="#cb94-438" aria-hidden="true" tabindex="-1"></a><span class="in">locator --vcf /home/ramirezb/oratrix_locator/data/socal.mac2.unlinked.vcf.gz --sample_data /home/ramirezb/oratrix_locator/data/sample_data_socal.txt --out /home/ramirezb/oratrix_locator/out_socal/oratrix --bootstrap --nboots 200</span></span>
-<span id="cb94-439"><a href="#cb94-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb94-440"><a href="#cb94-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-443"><a href="#cb94-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb94-444"><a href="#cb94-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
-<span id="cb94-445"><a href="#cb94-445" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Dropbox/08_yhpa_072025/locator/socal_run/out_socal&quot;</span>)</span>
-<span id="cb94-446"><a href="#cb94-446" aria-hidden="true" tabindex="-1"></a><span class="co"># Get list of all predloc files</span></span>
-<span id="cb94-447"><a href="#cb94-447" aria-hidden="true" tabindex="-1"></a>socal_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">&quot;predlocs.*</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span>
-<span id="cb94-448"><a href="#cb94-448" aria-hidden="true" tabindex="-1"></a>socal_files</span>
-<span id="cb94-449"><a href="#cb94-449" aria-hidden="true" tabindex="-1"></a><span class="co">#remove full run</span></span>
-<span id="cb94-450"><a href="#cb94-450" aria-hidden="true" tabindex="-1"></a>socal_files <span class="ot">&lt;-</span> socal_files[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">201</span>)]</span>
-<span id="cb94-451"><a href="#cb94-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-452"><a href="#cb94-452" aria-hidden="true" tabindex="-1"></a><span class="co">#This is the prediction from the full model trained on all SNPs (no resampling)</span></span>
-<span id="cb94-453"><a href="#cb94-453" aria-hidden="true" tabindex="-1"></a>socal_full<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;oratrix_bootFULL_predlocs.txt&quot;</span>)</span>
-<span id="cb94-454"><a href="#cb94-454" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-455"><a href="#cb94-455" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and bind them - all bootstrapped predictions</span></span>
-<span id="cb94-456"><a href="#cb94-456" aria-hidden="true" tabindex="-1"></a>socal_all_preds <span class="ot">&lt;-</span> socal_files <span class="sc">%&gt;%</span></span>
-<span id="cb94-457"><a href="#cb94-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="sc">~</span> <span class="fu">read_delim</span>(.x, <span class="at">delim =</span> <span class="st">&quot;,&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>), <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>)</span>
-<span id="cb94-458"><a href="#cb94-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-459"><a href="#cb94-459" aria-hidden="true" tabindex="-1"></a>socal_individual_means <span class="ot">&lt;-</span> socal_all_preds <span class="sc">%&gt;%</span></span>
-<span id="cb94-460"><a href="#cb94-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sampleID) <span class="sc">%&gt;%</span></span>
-<span id="cb94-461"><a href="#cb94-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_long =</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb94-462"><a href="#cb94-462" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_lat =</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb94-463"><a href="#cb94-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-464"><a href="#cb94-464" aria-hidden="true" tabindex="-1"></a>socal_summary_stats<span class="ot">&lt;-</span>socal_all_preds <span class="sc">%&gt;%</span></span>
-<span id="cb94-465"><a href="#cb94-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sampleID) <span class="sc">%&gt;%</span></span>
-<span id="cb94-466"><a href="#cb94-466" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_long =</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb94-467"><a href="#cb94-467" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_lat =</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb94-468"><a href="#cb94-468" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_x =</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb94-469"><a href="#cb94-469" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_y =</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb94-470"><a href="#cb94-470" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb94-471"><a href="#cb94-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-474"><a href="#cb94-474" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb94-475"><a href="#cb94-475" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 200 predictions</span></span>
-<span id="cb94-476"><a href="#cb94-476" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb94-477"><a href="#cb94-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-478"><a href="#cb94-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-479"><a href="#cb94-479" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-480"><a href="#cb94-480" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_all_preds, <span class="fu">aes</span>(<span class="at">x =</span>y, <span class="at">y =</span>x, <span class="at">col =</span> <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span>), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb94-481"><a href="#cb94-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 200 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-482"><a href="#cb94-482" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-483"><a href="#cb94-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-484"><a href="#cb94-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb94-485"><a href="#cb94-485" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb94-486"><a href="#cb94-486" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
-<span id="cb94-487"><a href="#cb94-487" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
-<span id="cb94-488"><a href="#cb94-488" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
-<span id="cb94-489"><a href="#cb94-489" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
-<span id="cb94-490"><a href="#cb94-490" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb94-491"><a href="#cb94-491" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-492"><a href="#cb94-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb94-493"><a href="#cb94-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb94-494"><a href="#cb94-494" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb94-495"><a href="#cb94-495" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb94-496"><a href="#cb94-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Southern California Predictions&quot;</span>,</span>
-<span id="cb94-497"><a href="#cb94-497" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb94-498"><a href="#cb94-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-499"><a href="#cb94-499" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 95% boostrap ellipse</span></span>
-<span id="cb94-500"><a href="#cb94-500" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb94-501"><a href="#cb94-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-502"><a href="#cb94-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-503"><a href="#cb94-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-504"><a href="#cb94-504" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
-<span id="cb94-505"><a href="#cb94-505" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Ellipse around bootstrapped points</span></span>
-<span id="cb94-506"><a href="#cb94-506" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_ellipse</span>(<span class="at">data =</span> socal_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
-<span id="cb94-507"><a href="#cb94-507" aria-hidden="true" tabindex="-1"></a>                 <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
-<span id="cb94-508"><a href="#cb94-508" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-509"><a href="#cb94-509" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 500 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-510"><a href="#cb94-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-511"><a href="#cb94-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-512"><a href="#cb94-512" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(</span>
-<span id="cb94-513"><a href="#cb94-513" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb94-514"><a href="#cb94-514" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
-<span id="cb94-515"><a href="#cb94-515" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
-<span id="cb94-516"><a href="#cb94-516" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
-<span id="cb94-517"><a href="#cb94-517" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
-<span id="cb94-518"><a href="#cb94-518" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb94-519"><a href="#cb94-519" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-520"><a href="#cb94-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb94-521"><a href="#cb94-521" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb94-522"><a href="#cb94-522" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb94-523"><a href="#cb94-523" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb94-524"><a href="#cb94-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Southern California Predictions&quot;</span>,</span>
-<span id="cb94-525"><a href="#cb94-525" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb94-526"><a href="#cb94-526" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb94-527"><a href="#cb94-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-528"><a href="#cb94-528" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Clean plots for manuscript</span></span>
-<span id="cb94-529"><a href="#cb94-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-532"><a href="#cb94-532" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb94-533"><a href="#cb94-533" aria-hidden="true" tabindex="-1"></a><span class="co">#confiscated predictions</span></span>
-<span id="cb94-534"><a href="#cb94-534" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb94-535"><a href="#cb94-535" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-536"><a href="#cb94-536" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-537"><a href="#cb94-537" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-538"><a href="#cb94-538" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
-<span id="cb94-539"><a href="#cb94-539" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ellipse around bootstrapped points</span></span>
-<span id="cb94-540"><a href="#cb94-540" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">data =</span> yhpa_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
-<span id="cb94-541"><a href="#cb94-541" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
-<span id="cb94-542"><a href="#cb94-542" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-543"><a href="#cb94-543" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_individual_means, aes(x = mean_lat, y = mean_long, color = &quot;mean of 200 bootstraps&quot;), size = 1) +</span></span>
-<span id="cb94-544"><a href="#cb94-544" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_full, aes(x = y, y = x,  color = &quot;prediction from all samples - all SNPs with no resampling&quot;), size = 1) +</span></span>
-<span id="cb94-545"><a href="#cb94-545" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-546"><a href="#cb94-546" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(</span>
-<span id="cb94-547"><a href="#cb94-547" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb94-548"><a href="#cb94-548" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
-<span id="cb94-549"><a href="#cb94-549" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
-<span id="cb94-550"><a href="#cb94-550" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb94-551"><a href="#cb94-551" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-552"><a href="#cb94-552" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb94-553"><a href="#cb94-553" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb94-554"><a href="#cb94-554" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb94-555"><a href="#cb94-555" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb94-556"><a href="#cb94-556" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Confiscated YHPA Predictions&quot;</span>,</span>
-<span id="cb94-557"><a href="#cb94-557" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb94-558"><a href="#cb94-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-559"><a href="#cb94-559" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-560"><a href="#cb94-560" aria-hidden="true" tabindex="-1"></a><span class="co">#southern california predictions</span></span>
-<span id="cb94-561"><a href="#cb94-561" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb94-562"><a href="#cb94-562" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-563"><a href="#cb94-563" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
-<span id="cb94-564"><a href="#cb94-564" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-565"><a href="#cb94-565" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
-<span id="cb94-566"><a href="#cb94-566" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Ellipse around bootstrapped points</span></span>
-<span id="cb94-567"><a href="#cb94-567" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_ellipse</span>(<span class="at">data =</span> socal_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
-<span id="cb94-568"><a href="#cb94-568" aria-hidden="true" tabindex="-1"></a>                 <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
-<span id="cb94-569"><a href="#cb94-569" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb94-570"><a href="#cb94-570" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_individual_means, aes(x = mean_lat, y = mean_long, color = &quot;mean of 500 bootstraps&quot;), size = 1) +</span></span>
-<span id="cb94-571"><a href="#cb94-571" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_full, aes(x = y, y = x,  color = &quot;prediction from all samples - all SNPs with no resampling&quot;), size = 1) +</span></span>
-<span id="cb94-572"><a href="#cb94-572" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb94-573"><a href="#cb94-573" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(</span>
-<span id="cb94-574"><a href="#cb94-574" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb94-575"><a href="#cb94-575" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
-<span id="cb94-576"><a href="#cb94-576" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
-<span id="cb94-577"><a href="#cb94-577" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb94-578"><a href="#cb94-578" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb94-579"><a href="#cb94-579" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb94-580"><a href="#cb94-580" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb94-581"><a href="#cb94-581" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
-<span id="cb94-582"><a href="#cb94-582" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
-<span id="cb94-583"><a href="#cb94-583" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Southern California Predictions&quot;</span>,</span>
-<span id="cb94-584"><a href="#cb94-584" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
-<span id="cb94-585"><a href="#cb94-585" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb94-427"><a href="#cb94-427" aria-hidden="true" tabindex="-1"></a>socal.vcf.mac2</span>
+<span id="cb94-428"><a href="#cb94-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-429"><a href="#cb94-429" aria-hidden="true" tabindex="-1"></a><span class="co">#sample data</span></span>
+<span id="cb94-430"><a href="#cb94-430" aria-hidden="true" tabindex="-1"></a>sample_data<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;~/Dropbox/08_yhpa_072025/locator/socal_run/sample_data_socal.txt&quot;</span>)</span>
+<span id="cb94-431"><a href="#cb94-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb94-432"><a href="#cb94-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-433"><a href="#cb94-433" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb94-434"><a href="#cb94-434" aria-hidden="true" tabindex="-1"></a><span class="in">#!/bin/sh</span></span>
+<span id="cb94-435"><a href="#cb94-435" aria-hidden="true" tabindex="-1"></a><span class="in">#</span></span>
+<span id="cb94-436"><a href="#cb94-436" aria-hidden="true" tabindex="-1"></a><span class="in">#SBATCH --job-name=locator_yhpa             # Job Name</span></span>
+<span id="cb94-437"><a href="#cb94-437" aria-hidden="true" tabindex="-1"></a><span class="in">#SBATCH --partition=mlz-medium         # Name of the Slurm partition used</span></span>
+<span id="cb94-438"><a href="#cb94-438" aria-hidden="true" tabindex="-1"></a><span class="in">#SBATCH --nodelist=n028</span></span>
+<span id="cb94-439"><a href="#cb94-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-440"><a href="#cb94-440" aria-hidden="true" tabindex="-1"></a><span class="in">locator --vcf /home/ramirezb/oratrix_locator/data/socal.mac2.unlinked.vcf.gz --sample_data /home/ramirezb/oratrix_locator/data/sample_data_socal.txt --out /home/ramirezb/oratrix_locator/out_socal/oratrix --bootstrap --nboots 200</span></span>
+<span id="cb94-441"><a href="#cb94-441" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb94-442"><a href="#cb94-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-445"><a href="#cb94-445" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb94-446"><a href="#cb94-446" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: false</span></span>
+<span id="cb94-447"><a href="#cb94-447" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Dropbox/08_yhpa_072025/locator/socal_run/out_socal&quot;</span>)</span>
+<span id="cb94-448"><a href="#cb94-448" aria-hidden="true" tabindex="-1"></a><span class="co"># Get list of all predloc files</span></span>
+<span id="cb94-449"><a href="#cb94-449" aria-hidden="true" tabindex="-1"></a>socal_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">&quot;predlocs.*</span><span class="sc">\\</span><span class="st">.txt&quot;</span>)</span>
+<span id="cb94-450"><a href="#cb94-450" aria-hidden="true" tabindex="-1"></a>socal_files</span>
+<span id="cb94-451"><a href="#cb94-451" aria-hidden="true" tabindex="-1"></a><span class="co">#remove full run</span></span>
+<span id="cb94-452"><a href="#cb94-452" aria-hidden="true" tabindex="-1"></a>socal_files <span class="ot">&lt;-</span> socal_files[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">201</span>)]</span>
+<span id="cb94-453"><a href="#cb94-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-454"><a href="#cb94-454" aria-hidden="true" tabindex="-1"></a><span class="co">#This is the prediction from the full model trained on all SNPs (no resampling)</span></span>
+<span id="cb94-455"><a href="#cb94-455" aria-hidden="true" tabindex="-1"></a>socal_full<span class="ot">&lt;-</span><span class="fu">read_delim</span>(<span class="st">&quot;oratrix_bootFULL_predlocs.txt&quot;</span>)</span>
+<span id="cb94-456"><a href="#cb94-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-457"><a href="#cb94-457" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and bind them - all bootstrapped predictions</span></span>
+<span id="cb94-458"><a href="#cb94-458" aria-hidden="true" tabindex="-1"></a>socal_all_preds <span class="ot">&lt;-</span> socal_files <span class="sc">%&gt;%</span></span>
+<span id="cb94-459"><a href="#cb94-459" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_df</span>(<span class="sc">~</span> <span class="fu">read_delim</span>(.x, <span class="at">delim =</span> <span class="st">&quot;,&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>), <span class="at">.id =</span> <span class="st">&quot;file&quot;</span>)</span>
+<span id="cb94-460"><a href="#cb94-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-461"><a href="#cb94-461" aria-hidden="true" tabindex="-1"></a>socal_individual_means <span class="ot">&lt;-</span> socal_all_preds <span class="sc">%&gt;%</span></span>
+<span id="cb94-462"><a href="#cb94-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sampleID) <span class="sc">%&gt;%</span></span>
+<span id="cb94-463"><a href="#cb94-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_long =</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb94-464"><a href="#cb94-464" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_lat =</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb94-465"><a href="#cb94-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-466"><a href="#cb94-466" aria-hidden="true" tabindex="-1"></a>socal_summary_stats<span class="ot">&lt;-</span>socal_all_preds <span class="sc">%&gt;%</span></span>
+<span id="cb94-467"><a href="#cb94-467" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sampleID) <span class="sc">%&gt;%</span></span>
+<span id="cb94-468"><a href="#cb94-468" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_long =</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb94-469"><a href="#cb94-469" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_lat =</span> <span class="fu">mean</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb94-470"><a href="#cb94-470" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_x =</span> <span class="fu">sd</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb94-471"><a href="#cb94-471" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_y =</span> <span class="fu">sd</span>(y, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb94-472"><a href="#cb94-472" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb94-473"><a href="#cb94-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-474"><a href="#cb94-474" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plotting Southern California Parrot samples</span></span>
+<span id="cb94-475"><a href="#cb94-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-478"><a href="#cb94-478" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb94-479"><a href="#cb94-479" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 200 predictions</span></span>
+<span id="cb94-480"><a href="#cb94-480" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-481"><a href="#cb94-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-482"><a href="#cb94-482" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-483"><a href="#cb94-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-484"><a href="#cb94-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_all_preds, <span class="fu">aes</span>(<span class="at">x =</span>y, <span class="at">y =</span>x, <span class="at">col =</span> <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span>), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb94-485"><a href="#cb94-485" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 200 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-486"><a href="#cb94-486" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-487"><a href="#cb94-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-488"><a href="#cb94-488" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb94-489"><a href="#cb94-489" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb94-490"><a href="#cb94-490" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all 200 bootstrapped predictions for unknown sample&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
+<span id="cb94-491"><a href="#cb94-491" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
+<span id="cb94-492"><a href="#cb94-492" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
+<span id="cb94-493"><a href="#cb94-493" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
+<span id="cb94-494"><a href="#cb94-494" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb94-495"><a href="#cb94-495" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-496"><a href="#cb94-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb94-497"><a href="#cb94-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-498"><a href="#cb94-498" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb94-499"><a href="#cb94-499" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb94-500"><a href="#cb94-500" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Southern California Predictions&quot;</span>,</span>
+<span id="cb94-501"><a href="#cb94-501" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb94-502"><a href="#cb94-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-503"><a href="#cb94-503" aria-hidden="true" tabindex="-1"></a><span class="co">#showing 95% boostrap ellipse</span></span>
+<span id="cb94-504"><a href="#cb94-504" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-505"><a href="#cb94-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-506"><a href="#cb94-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-507"><a href="#cb94-507" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-508"><a href="#cb94-508" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
+<span id="cb94-509"><a href="#cb94-509" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Ellipse around bootstrapped points</span></span>
+<span id="cb94-510"><a href="#cb94-510" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_ellipse</span>(<span class="at">data =</span> socal_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
+<span id="cb94-511"><a href="#cb94-511" aria-hidden="true" tabindex="-1"></a>                 <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb94-512"><a href="#cb94-512" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-513"><a href="#cb94-513" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_individual_means, <span class="fu">aes</span>(<span class="at">x =</span> mean_lat, <span class="at">y =</span> mean_long, <span class="at">color =</span> <span class="st">&quot;mean of 500 bootstraps&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-514"><a href="#cb94-514" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> socal_full, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x,  <span class="at">color =</span> <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-515"><a href="#cb94-515" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-516"><a href="#cb94-516" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(</span>
+<span id="cb94-517"><a href="#cb94-517" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb94-518"><a href="#cb94-518" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
+<span id="cb94-519"><a href="#cb94-519" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;mean of 200 bootstraps&quot;</span> <span class="ot">=</span> <span class="st">&quot;forestgreen&quot;</span>,</span>
+<span id="cb94-520"><a href="#cb94-520" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;prediction from all samples - all SNPs with no resampling&quot;</span> <span class="ot">=</span> <span class="st">&quot;skyblue&quot;</span>,</span>
+<span id="cb94-521"><a href="#cb94-521" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
+<span id="cb94-522"><a href="#cb94-522" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb94-523"><a href="#cb94-523" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-524"><a href="#cb94-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb94-525"><a href="#cb94-525" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-526"><a href="#cb94-526" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb94-527"><a href="#cb94-527" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb94-528"><a href="#cb94-528" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Southern California Predictions&quot;</span>,</span>
+<span id="cb94-529"><a href="#cb94-529" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb94-530"><a href="#cb94-530" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb94-531"><a href="#cb94-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-532"><a href="#cb94-532" aria-hidden="true" tabindex="-1"></a><span class="fu">## Clean plots of confiscated YHPA and Southern California Samples</span></span>
+<span id="cb94-533"><a href="#cb94-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-536"><a href="#cb94-536" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb94-537"><a href="#cb94-537" aria-hidden="true" tabindex="-1"></a><span class="co">#confiscated predictions</span></span>
+<span id="cb94-538"><a href="#cb94-538" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-539"><a href="#cb94-539" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-540"><a href="#cb94-540" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-541"><a href="#cb94-541" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-542"><a href="#cb94-542" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
+<span id="cb94-543"><a href="#cb94-543" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Ellipse around bootstrapped points</span></span>
+<span id="cb94-544"><a href="#cb94-544" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">data =</span> yhpa_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
+<span id="cb94-545"><a href="#cb94-545" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb94-546"><a href="#cb94-546" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-547"><a href="#cb94-547" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_individual_means, aes(x = mean_lat, y = mean_long, color = &quot;mean of 200 bootstraps&quot;), size = 1) +</span></span>
+<span id="cb94-548"><a href="#cb94-548" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = yhpa_full, aes(x = y, y = x,  color = &quot;prediction from all samples - all SNPs with no resampling&quot;), size = 1) +</span></span>
+<span id="cb94-549"><a href="#cb94-549" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-550"><a href="#cb94-550" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_color_manual</span>(</span>
+<span id="cb94-551"><a href="#cb94-551" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb94-552"><a href="#cb94-552" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
+<span id="cb94-553"><a href="#cb94-553" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
+<span id="cb94-554"><a href="#cb94-554" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb94-555"><a href="#cb94-555" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-556"><a href="#cb94-556" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb94-557"><a href="#cb94-557" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-558"><a href="#cb94-558" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb94-559"><a href="#cb94-559" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb94-560"><a href="#cb94-560" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Confiscated YHPA Predictions&quot;</span>,</span>
+<span id="cb94-561"><a href="#cb94-561" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb94-562"><a href="#cb94-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-563"><a href="#cb94-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-564"><a href="#cb94-564" aria-hidden="true" tabindex="-1"></a><span class="co">#southern california predictions</span></span>
+<span id="cb94-565"><a href="#cb94-565" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb94-566"><a href="#cb94-566" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_map, <span class="at">fill =</span> <span class="st">&quot;gray95&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-567"><a href="#cb94-567" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> mx_states, <span class="at">fill=</span><span class="st">&quot;gray95&quot;</span>) <span class="sc">+</span></span>
+<span id="cb94-568"><a href="#cb94-568" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> yhpa_shp, <span class="at">fill =</span> <span class="st">&quot;cornsilk2&quot;</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-569"><a href="#cb94-569" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_all_preds, aes(x =y, y =x, col = &quot;all 200 bootstrapped predictions for unknown sample&quot;), alpha = 0.4) +</span></span>
+<span id="cb94-570"><a href="#cb94-570" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Ellipse around bootstrapped points</span></span>
+<span id="cb94-571"><a href="#cb94-571" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_ellipse</span>(<span class="at">data =</span> socal_all_preds, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">group =</span> sampleID, <span class="at">color =</span> <span class="st">&quot;bootstrapped 95% ellipse&quot;</span>),</span>
+<span id="cb94-572"><a href="#cb94-572" aria-hidden="true" tabindex="-1"></a>                 <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, </span>
+<span id="cb94-573"><a href="#cb94-573" aria-hidden="true" tabindex="-1"></a>                 <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb94-574"><a href="#cb94-574" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_individual_means, aes(x = mean_lat, y = mean_long, color = &quot;mean of 500 bootstraps&quot;), size = 1) +</span></span>
+<span id="cb94-575"><a href="#cb94-575" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_point(data = socal_full, aes(x = y, y = x,  color = &quot;prediction from all samples - all SNPs with no resampling&quot;), size = 1) +</span></span>
+<span id="cb94-576"><a href="#cb94-576" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> sample_data, <span class="fu">aes</span>(<span class="at">x =</span> y, <span class="at">y =</span> x, <span class="at">color =</span> <span class="st">&quot;all yhpa callibration points&quot;</span>), <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb94-577"><a href="#cb94-577" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_color_manual</span>(</span>
+<span id="cb94-578"><a href="#cb94-578" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb94-579"><a href="#cb94-579" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;bootstrapped 95% ellipse&quot;</span> <span class="ot">=</span> <span class="st">&quot;palevioletred&quot;</span>,</span>
+<span id="cb94-580"><a href="#cb94-580" aria-hidden="true" tabindex="-1"></a>      <span class="st">&quot;all yhpa callibration points&quot;</span> <span class="ot">=</span> <span class="st">&quot;gray27&quot;</span></span>
+<span id="cb94-581"><a href="#cb94-581" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb94-582"><a href="#cb94-582" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-583"><a href="#cb94-583" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb94-584"><a href="#cb94-584" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb94-585"><a href="#cb94-585" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb94-586"><a href="#cb94-586" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">10</span>, <span class="at">r =</span> <span class="dv">10</span>, <span class="at">b =</span> <span class="dv">30</span>, <span class="at">l =</span> <span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb94-587"><a href="#cb94-587" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Locator Southern California Predictions&quot;</span>,</span>
+<span id="cb94-588"><a href="#cb94-588" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;Longitude&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Latitude&quot;</span>)</span>
+<span id="cb94-589"><a href="#cb94-589" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

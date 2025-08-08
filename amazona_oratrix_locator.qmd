@@ -166,7 +166,7 @@ summary_stats<-all_preds %>%
             sd_y = sd(y, na.rm = TRUE))
 ```
 
-#### Plotting predictions
+## Plotting Tamaulipas ao_MLZ_39530 predictions
 
 ```{r}
 #showing 200 predictions
@@ -295,6 +295,8 @@ yhpa_summary_stats<-yhpa_all_preds %>%
             sd_x = sd(x, na.rm = TRUE),
             sd_y = sd(y, na.rm = TRUE))
 ```
+
+## Plotting confiscated YHPA predictions
 
 ```{r}
 #showing 200 predictions
@@ -439,6 +441,8 @@ socal_summary_stats<-socal_all_preds %>%
             sd_y = sd(y, na.rm = TRUE))
 ```
 
+## Plotting Southern California Parrot samples
+
 ```{r}
 #showing 200 predictions
 ggplot() +
@@ -493,7 +497,7 @@ ggplot() +
   x = "Longitude", y = "Latitude")
 ```
 
-#### Clean plots for manuscript
+## Clean plots of confiscated YHPA and Southern California Samples
 
 ```{r}
 #confiscated predictions
