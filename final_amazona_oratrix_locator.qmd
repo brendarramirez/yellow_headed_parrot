@@ -1,0 +1,718 @@
+---
+title: "YHPA.locator"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+## Running Locator on YHPA Samples
+
+## Testing locator - trying to predict locality of ao_MLZ_48333 (Tamaulipas)
+
+#### Load libraries
+
+```{r}
+library(SNPfiltR)
+library(vcfR)
+library(ggplot2)
+library(stringr)
+library(StAMPP)
+library(adegenet)
+library(tidyverse)
+library(sf)
+library(rnaturalearth)
+library(geosphere)
+```
+
+#### Read in vcf and popmap
+
+```{r}
+#| output: false
+vcfR<-read.vcfR("~/Dropbox/08_yhpa_072025/yhpa_final_filtered_unlinked.vcf.gz")
+vcfR
+
+popmap<-read.csv("~/Dropbox/08_yhpa_072025/oratrix_popmap.csv")
+popmap
+
+#make sure sampling file matches vcf
+popmap$id %in% colnames(vcfR@gt)[-1]
+colnames(vcfR@gt)[-1] %in% popmap$id
+```
+
+#### Creating vcf for locator
+
+Using filtered vcf with 80% threshold and thinned created using `oratrix_snp_filtering.qmd`. This vcf corresponds to the samples in the sample data document locator uses to predict localities `sample_data_tamaulipas_test.txt`.
+
+```{r}
+#removing 7 Belize samples with the most missing data (only keeping 2 samples with the most data for balance)
+miss<-missing_by_sample(vcfR)
+
+#we need to remove socal samples (ao_MLZ_1105, ao_MLZ_70063, and ao_MLZ_70074) since we do not know their origin
+#removing confiscated scp samples because we don't have their localities
+test.vcf<-(vcfR)[, !colnames((vcfR)@gt) %in% c("ao_MLZ_1105", #socal
+                                               "ao_MLZ_70063", #socal
+                                               "ao_MLZ_70074", #socal
+                                               "ao_BC_108", #belize
+                                               "ao_BC_109", #belize
+                                               "ao_BC_A113", #belize
+                                               "ao_BC_A114", #belize
+                                               "ao_BC_A116", #belize
+                                               "ao_BC_A117", #belize
+                                               "ao_BC_A118", #belize
+                                               "ao_SP_1", #all SP samples confiscated
+                                               "ao_SP_2",
+                                               "ao_SP_3",
+                                               "ao_SP_4",
+                                               "ao_SP_5",
+                                               "ao_SP_6",
+                                               "ao_SP_7",
+                                               "ao_SP_8",
+                                               "ao_SP_831",
+                                               "ao_SP_832",
+                                               "ao_SP_833",
+                                               "ao_SP_834",
+                                               "ao_SP_835",
+                                               "ao_SP_836",
+                                               "ao_SP_837",
+                                               "ao_SP_838",
+                                               "ao_SP_839",
+                                               "ao_SP_840")]
+
+test.vcf
+```
+
+#### Create popmap and save vcf
+
+```{r}
+#subset popmap to only include retained individuals
+popmap<-popmap[popmap$id %in% colnames(test.vcf@gt),]
+
+#make sure sampling file matches vcf
+popmap$id %in% colnames(test.vcf@gt)[-1]
+colnames(test.vcf@gt)[-1] %in% popmap$id
+
+#reorder sampling file to match order of samples in vcf
+sample.info<-popmap[match(colnames(test.vcf@gt)[-1], popmap$id),]
+popmap$id == colnames(test.vcf@gt)[-1]
+
+test.vcf.mac2<-min_mac(test.vcf, min.mac = 2)
+
+# vcfR:: write.vcf(test.vcf.mac2, "~/Dropbox/08_yhpa_072025/locator/final_runs/tamaulipas_run/tamaulipas.mac2.unlinked.subsampled.belize.vcf.gz")
+
+test.vcf.mac2
+
+#confirm sample sheet matches the samples in the vcf
+test_sample_data<-read_delim("~/Dropbox/08_yhpa_072025/locator/final_runs/tamaulipas_run/sample_data_tamaulipas_subsampled_belize.txt")
+
+colnames(test.vcf.mac2@gt)
+test_sample_data$sampleID
+
+test_sample_data$sampleID %in% colnames(test.vcf.mac2@gt)[-1]
+colnames(test.vcf.mac2@gt)[-1] %in% test_sample_data$sampleID
+```
+
+#### In command line `locator_tamaulipas_test.sh` using Occidental College's HPC Cluster Bletchley
+
+```         
+#!/bin/sh
+#
+#SBATCH --job-name=locator_tamaulipas             # Job Name
+#SBATCH --partition=mlz-medium         # Name of the Slurm partition used
+#SBATCH --nodelist=n028
+
+locator --vcf /home/ramirezb/oratrix_locator/data/tamaulipas.mac2.unlinked.subsampled.belize.vcf.gz --sample_data /home/ramirezb/oratrix_locator/data/sample_data_tamaulipas_subsampled_belize.txt --out /home/ramirezb/oratrix_locator/out_tamaulipas_final/oratrix --bootstrap --nboots 200 --train_split 0.7 --nlayers 6 --seed 641
+```
+
+#### Testing to see if locator predicted the correct locality
+
+```{r}
+setwd("~/Dropbox/08_yhpa_072025/locator/")
+
+#all data
+all_data<-read_delim("~/Desktop/oratrix_locator/all_samples_sample_data.txt")
+
+locator_test<-all_data[all_data$sampleID %in% c("ao_MLZ_48333"),]
+locator_test$y<-as.numeric(locator_test$y)
+```
+
+#### Read in shapefiles
+
+```{r}
+#map
+yhpa_map <- ne_countries(country = c("Guatemala", "Belize", "El Salvador",
+                                     "Honduras", "Nicaragua", "Costa Rica", "Panama"), returnclass = "sf") 
+
+mx_states<-ne_states("Mexico", returnclass = "sf")
+
+#yhpa range
+yhpa_shp<-st_read("~/Dropbox/08_yhpa_072025/iucn_shp_files/trimmed_shapefiles/trimmed_yhpa.shp")
+```
+
+#### Load in the predictions
+
+```{r}
+#| output: false
+setwd("~/Dropbox/08_yhpa_072025/locator/final_runs/tamaulipas_run/out_tamaulipas_final")
+# Get list of all predloc files
+files <- list.files(pattern = "predlocs.*\\.txt")
+files
+#remove full run
+files <- files[-c(201)]
+
+#This is the prediction from the full model trained on all SNPs (no resampling)
+full<-read_delim("oratrix_bootFULL_predlocs.txt")
+
+# Read and bind them - all bootstrapped predictions
+all_preds <- files %>%
+  map_df(~ read_delim(.x, delim = ",", col_names = TRUE), .id = "file")
+
+individual_means <- all_preds %>%
+  group_by(sampleID) %>%
+  summarize(mean_long = mean(y, na.rm = TRUE),
+            mean_lat = mean(x, na.rm = TRUE))
+
+summary_stats<-all_preds %>%
+  group_by(sampleID) %>%
+  summarize(mean_long = mean(y, na.rm = TRUE),
+            mean_lat = mean(x, na.rm = TRUE),
+            sd_x = sd(x, na.rm = TRUE),
+            sd_y = sd(y, na.rm = TRUE))
+
+#model performance
+# R2(x)=0.9048874401793426
+# R2(y)=0.7251666190870507
+# mean validation error 4.500907480553764
+# median validation error 2.096568170925232
+
+#calculate distance the predictions are from the actual locality
+df_mean <- locator_test %>%
+  inner_join(individual_means, by = "sampleID") %>%
+  mutate(
+    dist_km_mean = distHaversine(
+      cbind(y, x),                 # true location (lon, lat)
+      cbind(mean_long, mean_lat)   # mean prediction (lon, lat)
+    ) / 1000
+  )
+
+df_full <- locator_test %>%
+  inner_join(full, by = "sampleID") %>%
+  mutate(
+    dist_km_full = distHaversine(
+      cbind(locator_test$y, locator_test$x),     # true location
+      cbind(full$y, full$x)  # full prediction (renamed cols after join)
+    ) / 1000
+  )
+
+distance_df <- df_mean %>%
+  select(sampleID, dist_km_mean) %>%
+  left_join(df_full %>% select(sampleID, dist_km_full), by = "sampleID")
+
+distance_df
+
+distance_line_means <- data.frame(
+  true_x = locator_test$x,
+  true_y = locator_test$y,
+  pred_x = individual_means$mean_lat,
+  pred_y = individual_means$mean_long
+)
+
+distance_line_full <- data.frame(
+  true_x = locator_test$x,
+  true_y = locator_test$y,
+  pred_x = full$x,
+  pred_y = full$y
+)
+```
+
+#### Plotting predictions
+
+```{r}
+#showing 200 predictions
+# tamaulipas_test<-
+  ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  geom_point(data = all_preds, aes(x = y, y = x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4, size=2) +
+  geom_point(data = individual_means, aes(x = mean_long, y = mean_lat, color = "mean of 200 bootstraps"), size = 2) +
+  geom_point(data = full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 2) +
+  geom_point(data = test_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 2) +
+  geom_point(data = locator_test, aes(x = y, y = x, col = "real location of ao_MLZ_48333"), size = 2) +
+    
+  #adding in distance between true locality and prediction  
+   #mean prediction: 333.812	km
+   geom_segment(data = distance_line_means,
+               aes(x = true_y, y = true_x, xend = pred_y, yend = pred_x),
+               color = "black", linetype = "dashed") +
+   #full prediction: 384.2968	km
+   geom_segment(data = distance_line_full,
+               aes(x = true_y, y = true_x, xend = pred_y, yend = pred_x),
+               color = "black", linetype = "dashed") +
+    
+    scale_color_manual(
+    values = c(
+      "all 200 bootstrapped predictions for unknown sample" = "palevioletred",
+      "mean of 200 bootstraps" = "forestgreen",
+      "prediction from all samples - all SNPs with no resampling" = "skyblue",
+      "all yhpa callibration points" = "gray27",
+      "real location of ao_MLZ_48333" = "#ffab00"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = c(1, 0.6)) +
+  labs(title = "Locator Predicted Origins (Tamaulipas test)",
+  x = "Longitude", y = "Latitude")
+
+#ggsave(tamaulipas_test,
+#       filename="~/Dropbox/08_yhpa_072025/figures/locator/tamaulipas_test.svg",
+#       device="svg",
+#       dpi = 400, width = 12, height = 6)
+```
+
+```{r}
+#showing 95% boostrap ellipse
+# tamaulipas_ellipse<-
+  ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  # geom_point(data = all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4) +
+  # Ellipse around bootstrapped points
+  stat_ellipse(data = all_preds, aes(x = y, y = x, color = "bootstrapped 95% ellipse"), level = 0.95, linetype = 2, linewidth = 1) +
+  geom_point(data = individual_means, aes(x = mean_long, y = mean_lat, color = "mean of 200 bootstraps"), size = 2) +
+  geom_point(data = full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 2) +
+  geom_point(data = test_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 2) +
+  geom_point(data = locator_test, aes(x = y, y = x, col = "real location of ao_MLZ_48333"), size = 2) +
+    
+  #adding in distance between true locality and prediction  
+   #mean prediction: 333.812	km
+   geom_segment(data = distance_line_means,
+               aes(x = true_y, y = true_x, xend = pred_y, yend = pred_x),
+               color = "black", linetype = "dashed") +
+   #full prediction: 384.2968	km
+   geom_segment(data = distance_line_full,
+               aes(x = true_y, y = true_x, xend = pred_y, yend = pred_x),
+               color = "black", linetype = "dashed") +
+    
+  scale_color_manual(
+    values = c(
+      "bootstrapped 95% ellipse" = "palevioletred",
+      "mean of 200 bootstraps" = "forestgreen",
+      "prediction from all samples - all SNPs with no resampling" = "skyblue",
+      "all yhpa callibration points" = "gray30",
+      "real location of ao_MLZ_48333" = "#ffab00"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = c(1, 0.6)) +
+  labs(title = "Locator Predicted Origins (Tamaulipas test)",
+  x = "Longitude", y = "Latitude")
+  
+# ggsave(tamaulipas_ellipse,
+#        filename="~/Dropbox/08_yhpa_072025/figures/locator/tamaulipas_test_ellipse.svg",
+#        device="svg",
+#        dpi = 400, width = 12, height = 6)
+```
+
+------------------------------------------------------------------------
+
+## Predicting yhpa samples
+
+```{r}
+#we need to remove socal samples (ao_MLZ_1105, ao_MLZ_70063, and ao_MLZ_70074) since we do not know their origin
+#need to downsample Belize again
+#now trying to predict confiscated scp samples because we don't have their localities
+yhpa.scp.vcf<-(vcfR)[, !colnames((vcfR)@gt) %in% c("ao_BC_108", #belize
+                                                   "ao_BC_109", #belize
+                                                   "ao_BC_A113", #belize
+                                                   "ao_BC_A114", #belize
+                                                   "ao_BC_A116", #belize
+                                                   "ao_BC_A117", #belize
+                                                   "ao_BC_A118", #belize
+                                                   "ao_MLZ_1105", #socal
+                                                   "ao_MLZ_70063", #socal
+                                                   "ao_MLZ_70074")] #socal
+
+yhpa.scp.vcf
+```
+
+```{r}
+popmap<-read.csv("~/Dropbox/08_yhpa_072025/oratrix_popmap.csv")
+popmap
+
+#subset popmap to only include retained individuals
+popmap<-popmap[popmap$id %in% colnames(yhpa.scp.vcf@gt),]
+
+#make sure sampling file matches vcf
+popmap$id %in% colnames(yhpa.scp.vcf@gt)[-1]
+colnames(yhpa.scp.vcf@gt)[-1] %in% popmap$id
+
+#reorder sampling file to match order of samples in vcf
+sample.info<-popmap[match(colnames(yhpa.scp.vcf@gt)[-1], popmap$id),]
+popmap$id == colnames(yhpa.scp.vcf@gt)[-1]
+
+yhpa.scp.vcf.mac2<-min_mac(yhpa.scp.vcf, min.mac = 2)
+
+# vcfR:: write.vcf(yhpa.scp.vcf.mac2, "~/Dropbox/08_yhpa_072025/locator/final_runs/yhpa_run/yhpa.mac2.unlinked.subsampled.vcf.gz")
+
+yhpa.scp.vcf.mac2
+
+#confirm sample sheet matches the samples in the vcf
+yhpa_sample_data<-read.delim("~/Dropbox/08_yhpa_072025/locator/final_runs/yhpa_run/final_sample_data_yhpa.txt")
+
+colnames(yhpa.scp.vcf.mac2@gt)
+yhpa_sample_data$sampleID
+
+yhpa_sample_data$sampleID %in% colnames(yhpa.scp.vcf.mac2@gt)[-1]
+colnames(yhpa.scp.vcf.mac2@gt)[-1] %in% yhpa_sample_data$sampleID 
+```
+
+In Bletchley run `final_yhpa_locator.sh`
+
+```         
+#!/bin/sh
+#
+#SBATCH --job-name=locator_yhpa             # Job Name
+#SBATCH --partition=mlz-medium         # Name of the Slurm partition used
+#SBATCH --nodelist=n028
+
+locator --vcf /home/ramirezb/oratrix_locator/data/yhpa.mac2.unlinked.subsampled.vcf.gz --sample_data /home/ramirezb/oratrix_locator/data/final_sample_data_yhpa.txt --out /home/ramirezb/oratrix_locator/out_yhpa_final/oratrix --bootstrap --nboots 200 --train_split 0.7 --nlayers 6 --seed 378
+```
+
+```{r}
+#| output: false
+setwd("~/Dropbox/08_yhpa_072025/locator/final_runs/yhpa_run/out_yhpa_final")
+# Get list of all predloc files
+yhpa_files <- list.files(pattern = "predlocs.*\\.txt")
+yhpa_files
+#remove full run
+yhpa_files <- yhpa_files[-c(201)]
+
+#This is the prediction from the full model trained on all SNPs (no resampling)
+yhpa_full<-read_delim("oratrix_bootFULL_predlocs.txt")
+
+# Read and bind them - all bootstrapped predictions
+yhpa_all_preds <- yhpa_files %>%
+  map_df(~ read_delim(.x, delim = ",", col_names = TRUE), .id = "file")
+
+yhpa_individual_means <- yhpa_all_preds %>%
+  group_by(sampleID) %>%
+  summarize(mean_long = mean(x, na.rm = TRUE),
+            mean_lat = mean(y, na.rm = TRUE))
+
+yhpa_summary_stats<-yhpa_all_preds %>%
+  group_by(sampleID) %>%
+  summarize(mean_long = mean(x, na.rm = TRUE),
+            mean_lat = mean(y, na.rm = TRUE),
+            sd_x = sd(x, na.rm = TRUE),
+            sd_y = sd(y, na.rm = TRUE))
+
+#model performance
+# R2(x)=0.9204751931039864
+# R2(y)=0.7462154483480632
+# mean validation error 3.088783654069266
+# median validation error 2.6059843971358085
+```
+
+```{r}
+#showing 200 predictions
+# confiscated_yhpa<-
+ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4, size = 2) +
+  geom_point(data = yhpa_individual_means, aes(x = mean_lat, y = mean_long, color = "mean of 200 bootstraps"), size = 2) +
+  geom_point(data = yhpa_full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 2) +
+  geom_point(data = yhpa_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 2) +
+    scale_color_manual(
+    values = c(
+      "all 200 bootstrapped predictions for unknown sample" = "palevioletred",
+      "mean of 200 bootstraps" = "forestgreen",
+      "prediction from all samples - all SNPs with no resampling" = "skyblue",
+      "all yhpa callibration points" = "gray27"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = c(1, 0.6)) +
+  labs(title = "Locator Confiscated YHPA Predictions",
+  x = "Longitude", y = "Latitude")
+
+# ggsave(confiscated_yhpa,
+#        filename="~/Dropbox/08_yhpa_072025/figures/locator/confiscated_yhpa.svg",
+#        device="svg",
+#        dpi = 400, width = 12, height = 6)
+```
+
+```{r}
+#showing 95% boostrap ellipse
+# confiscated_ellipse<-
+  ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  # geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4) +
+  # Ellipse around bootstrapped points
+  stat_ellipse(data = yhpa_all_preds, aes(x = y, y = x, group = sampleID, color = "bootstrapped 95% ellipse"),
+    level = 0.95, linewidth = 0.4, linetype = 2, alpha = 0.5, 
+    inherit.aes = FALSE, show.legend = FALSE) +
+  geom_point(data = yhpa_individual_means, aes(x = mean_lat, y = mean_long, color = "mean of 200 bootstraps"), size = 2) +
+  geom_point(data = yhpa_full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 2) +
+  geom_point(data = yhpa_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 2) +
+    scale_color_manual(
+    values = c(
+      "bootstrapped 95% ellipse" = "palevioletred",
+      "mean of 200 bootstraps" = "forestgreen",
+      "prediction from all samples - all SNPs with no resampling" = "skyblue",
+      "all yhpa callibration points" = "gray27"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = c(1, 0.6)) +
+  labs(title = "Locator Confiscated YHPA Predictions",
+  x = "Longitude", y = "Latitude")
+
+# ggsave(confiscated_ellipse,
+#        filename="~/Dropbox/08_yhpa_072025/figures/locator/confiscated_yhpa_ellipse.svg",
+#        device="svg",
+#        dpi = 400, width = 12, height = 6)
+```
+
+------------------------------------------------------------------------
+
+## Predicting Southern California samples
+
+```{r}
+#we want to find localities of southern california samples (ao_MLZ_1105, ao_MLZ_70063, and ao_MLZ_70074)
+#need to downsample Belize again
+#removing confiscated scp samples because we don't have their localities
+socal.vcf<-(vcfR)[, !colnames((vcfR)@gt) %in% c("ao_BC_108", #belize
+                                                "ao_BC_109", #belize
+                                                "ao_BC_A113", #belize
+                                                "ao_BC_A114", #belize
+                                                "ao_BC_A116", #belize
+                                                "ao_BC_A117", #belize
+                                                "ao_BC_A118", #belize
+                                                "ao_SP_1", #all SP samples confiscated
+                                                "ao_SP_2",
+                                                "ao_SP_3",
+                                                "ao_SP_4",
+                                                "ao_SP_5",
+                                                "ao_SP_6",
+                                                "ao_SP_7",
+                                                "ao_SP_8",
+                                                "ao_SP_831",
+                                                "ao_SP_832",
+                                                "ao_SP_833",
+                                                "ao_SP_834",
+                                                "ao_SP_835",
+                                                "ao_SP_836",
+                                                "ao_SP_837",
+                                                "ao_SP_838",
+                                                "ao_SP_839",
+                                                "ao_SP_840")]
+
+socal.vcf
+```
+
+```{r}
+popmap<-read.csv("~/Dropbox/08_yhpa_072025/oratrix_popmap.csv")
+popmap
+
+#subset popmap to only include retained individuals
+popmap<-popmap[popmap$id %in% colnames(socal.vcf@gt),]
+
+#make sure sampling file matches vcf
+popmap$id %in% colnames(socal.vcf@gt)[-1]
+colnames(socal.vcf@gt)[-1] %in% popmap$id
+
+#reorder sampling file to match order of samples in vcf
+sample.info<-popmap[match(colnames(socal.vcf@gt)[-1], popmap$id),]
+popmap$id == colnames(socal.vcf@gt)[-1]
+
+socal.vcf.mac2<-min_mac(socal.vcf, min.mac = 2)
+
+# vcfR:: write.vcf(socal.vcf, "~/Dropbox/08_yhpa_072025/locator/final_runs/socal_run/socal.mac2.unlinked.subsampled.vcf.gz")
+
+socal.vcf.mac2
+
+#confirm sample sheet matches the samples in the vcf
+socal_sample_data<-read_delim("~/Dropbox/08_yhpa_072025/locator/final_runs/socal_run/sample_data_socal_final.txt")
+
+colnames(socal.vcf.mac2@gt)
+socal_sample_data$sampleID
+
+socal_sample_data$sampleID %in% colnames(socal.vcf.mac2@gt)[-1]
+colnames(socal.vcf.mac2@gt)[-1] %in% socal_sample_data$sampleID
+```
+
+In Bletchley run `final_socal_locator.sh`
+
+```         
+#!/bin/sh
+#
+#SBATCH --job-name=locator_yhpa             # Job Name
+#SBATCH --partition=mlz-medium         # Name of the Slurm partition used
+#SBATCH --nodelist=n028
+
+locator --vcf /home/ramirezb/oratrix_locator/data/socal.mac2.unlinked.subsampled.vcf.gz --sample_data /home/ramirezb/oratrix_locator/data/sample_data_socal_final.txt --out /home/ramirezb/oratrix_locator/out_socal/oratrix --bootstrap --nboots 200 --seed 437
+```
+
+```{r}
+#| output: false
+setwd("~/Dropbox/08_yhpa_072025/locator/final_runs/socal_run/out_socal_final")
+# Get list of all predloc files
+socal_files <- list.files(pattern = "predlocs.*\\.txt")
+socal_files
+#remove full run
+socal_files <- socal_files[-c(201)]
+
+#This is the prediction from the full model trained on all SNPs (no resampling)
+socal_full<-read_delim("oratrix_bootFULL_predlocs.txt")
+
+# Read and bind them - all bootstrapped predictions
+socal_all_preds <- socal_files %>%
+  map_df(~ read_delim(.x, delim = ",", col_names = TRUE), .id = "file")
+
+socal_individual_means <- socal_all_preds %>%
+  group_by(sampleID) %>%
+  summarize(mean_long = mean(x, na.rm = TRUE),
+            mean_lat = mean(y, na.rm = TRUE))
+
+socal_summary_stats<-socal_all_preds %>%
+  group_by(sampleID) %>%
+  summarize(mean_long = mean(x, na.rm = TRUE),
+            mean_lat = mean(y, na.rm = TRUE),
+            sd_x = sd(x, na.rm = TRUE),
+            sd_y = sd(y, na.rm = TRUE))
+
+#model performance
+# R2(x)=0.6587273502642388
+# R2(y)=0.7190529663421713
+# mean validation error 3.632709017928652
+# median validation error 3.264269199229253
+```
+
+```{r}
+#showing 200 predictions
+ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  geom_point(data = socal_all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4) +
+  geom_point(data = socal_individual_means, aes(x = mean_lat, y = mean_long, color = "mean of 200 bootstraps"), size = 1) +
+  geom_point(data = socal_full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 1) +
+  geom_point(data = socal_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 1) +
+  scale_color_manual(
+    values = c(
+      "all 200 bootstrapped predictions for unknown sample" = "palevioletred",
+      "mean of 200 bootstraps" = "forestgreen",
+      "prediction from all samples - all SNPs with no resampling" = "skyblue",
+      "all yhpa callibration points" = "gray27"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        plot.margin = margin(t = 10, r = 10, b = 30, l = 10)) +
+  labs(title = "Locator Southern California Predictions",
+  x = "Longitude", y = "Latitude")
+```
+
+```{r}
+#showing 95% boostrap ellipse
+ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  # geom_point(data = socal_all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4) +
+   # Ellipse around bootstrapped points
+    stat_ellipse(data = socal_all_preds, aes(x = y, y = x, group = sampleID, color = "bootstrapped 95% ellipse"),
+                 level = 0.95, linewidth = 0.4, linetype = 2, alpha = 0.5, 
+                 inherit.aes = FALSE, show.legend = FALSE) +
+  geom_point(data = socal_individual_means, aes(x = mean_lat, y = mean_long, color = "mean of 200 bootstraps"), size = 1) +
+  geom_point(data = socal_full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 1) +
+  geom_point(data = socal_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 1) +
+      scale_color_manual(
+    values = c(
+      "bootstrapped 95% ellipse" = "palevioletred",
+      "mean of 200 bootstraps" = "forestgreen",
+      "prediction from all samples - all SNPs with no resampling" = "skyblue",
+      "all yhpa callibration points" = "gray27"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        plot.margin = margin(t = 10, r = 10, b = 30, l = 10)) +
+  labs(title = "Locator Southern California Predictions",
+  x = "Longitude", y = "Latitude")
+```
+
+------------------------------------------------------------------------
+
+#### Clean plots for manuscript
+
+```{r}
+#confiscated predictions
+ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  # geom_point(data = yhpa_all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4) +
+  # Ellipse around bootstrapped points
+  stat_ellipse(data = yhpa_all_preds, aes(x = y, y = x, group = sampleID, color = "bootstrapped 95% ellipse"),
+    level = 0.95, linewidth = 0.4, linetype = 2, alpha = 0.5, 
+    inherit.aes = FALSE, show.legend = FALSE) +
+  # geom_point(data = yhpa_individual_means, aes(x = mean_lat, y = mean_long, color = "mean of 200 bootstraps"), size = 1) +
+  # geom_point(data = yhpa_full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 1) +
+  geom_point(data = yhpa_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 1) +
+      scale_color_manual(
+    values = c(
+      "bootstrapped 95% ellipse" = "palevioletred",
+      "all yhpa callibration points" = "gray27"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        plot.margin = margin(t = 10, r = 10, b = 30, l = 10)) +
+  labs(title = "Locator Confiscated YHPA Predictions",
+  x = "Longitude", y = "Latitude")
+
+
+#southern california predictions
+ggplot() +
+  geom_sf(data = yhpa_map, fill = "gray95", color = "black") +
+  geom_sf(data = mx_states, fill="gray95") +
+  geom_sf(data = yhpa_shp, fill = "cornsilk2", show.legend = FALSE) +
+  # geom_point(data = socal_all_preds, aes(x =y, y =x, col = "all 200 bootstrapped predictions for unknown sample"), alpha = 0.4) +
+   # Ellipse around bootstrapped points
+    stat_ellipse(data = socal_all_preds, aes(x = y, y = x, group = sampleID, color = "bootstrapped 95% ellipse"),
+                 level = 0.95, linewidth = 0.4, linetype = 2, alpha = 0.5, 
+                 inherit.aes = FALSE, show.legend = FALSE) +
+  # geom_point(data = socal_individual_means, aes(x = mean_lat, y = mean_long, color = "mean of 500 bootstraps"), size = 1) +
+  # geom_point(data = socal_full, aes(x = y, y = x,  color = "prediction from all samples - all SNPs with no resampling"), size = 1) +
+  geom_point(data = socal_sample_data, aes(x = y, y = x, color = "all yhpa callibration points"), size = 1) +
+   scale_color_manual(
+    values = c(
+      "bootstrapped 95% ellipse" = "palevioletred",
+      "all yhpa callibration points" = "gray27"
+    )
+  ) +
+  theme_classic() +
+  theme(legend.title = element_blank(),
+        legend.position = "bottom",
+        plot.margin = margin(t = 10, r = 10, b = 30, l = 10)) +
+  labs(title = "Locator Southern California Predictions",
+  x = "Longitude", y = "Latitude")
+```
