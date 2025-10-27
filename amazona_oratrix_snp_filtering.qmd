@@ -161,7 +161,7 @@ colnames(subspecies_popmap)<-c("sample_ID", "Country_State")
 subspecies<-left_join(subspecies_popmap, yhpa_occs)
 subspecies$Subspecies[is.na(subspecies$Subspecies)] <- "unknown"
 ```
-
+### PCA
 ```{r}
 #labeled pca
 #convert each to genlight
@@ -201,7 +201,7 @@ ggplot(di.pca.scores, aes(x=PC1, y=PC2)) +
 #        device="svg",
 #        dpi = 400, width = 8, height = 6)
 ```
-
+### Formatted PCA
 ```{r}
 #formatted pca
 
@@ -261,7 +261,7 @@ stat_ellipse(
 #        device="svg",
 #        dpi = 400, width = 8, height = 6)
 ```
-
+### SplitsTree
 ```{r splitstree_80}
 pop(gena)<-gena@ind.names
 sample.div.80 <- stamppNeisD(gena, pop = FALSE)
@@ -276,7 +276,7 @@ rownames(sample.div.80)<-gsub("ao_", "", rownames(sample.div.80))
 
 knitr::include_graphics("~/Dropbox/08_yhpa_072025/splitstree/oratrix.80.splitstree.png")
 ```
-
+### Final filtered VCF
 ```{r final_filtered_vcf}
 vcfR.trim.80
 miss<-missing_by_sample(vcfR.trim.80)
@@ -286,7 +286,7 @@ miss.df
 # write.csv(miss.df, "~/Dropbox/08_yhpa_072025/yhpa_final_filtered_stats.csv")
 ```
 
-Eastern MX zoom in
+### Eastern MX subset
 
 ```{r}
 #load vcf
@@ -352,7 +352,7 @@ rownames(di.pca.east.scores) == popmap$id
 #add in percent variance explained
 var_frac <- di.pca.east$eig/sum(di.pca.east$eig)
 ```
-
+### Eastern MX PCA
 ```{r}
 #pca
 #for ellipse
