@@ -34,7 +34,7 @@ library(dplyr)
 
 ```{r read_in_vcf}
 #| output: false
-vcfR <- read.vcfR("~/Dropbox/08_yhpa_072025/updated.54.amazona.oratrix.snps.unfiltered.vcf")
+vcfR <- read.vcfR("~/Dropbox/08_yhpa_072025/amazona.oratrix.unfiltered.snps.vcf.gz")
 ```
 
 ### Make sample names match
@@ -42,7 +42,7 @@ vcfR <- read.vcfR("~/Dropbox/08_yhpa_072025/updated.54.amazona.oratrix.snps.unfi
 ```{r matching_sample_names}
 vcfR
 
-sample.info<-read.csv("~/Desktop/genomics/snp_calling/oratrix_nov2024/new_samples/clean_sample_info.csv")
+sample.info<-read.csv("~/Dropbox/08_yhpa_072025/clean_sample_info.csv")
 
 #check vcf colnames
 colnames(vcfR@gt)
@@ -135,12 +135,12 @@ vcfR.trim.80
 vcfR.trim.80<-min_mac(vcfR.trim.80, min.mac = 2)
 vcfR.trim.80
 
-# vcfR::write.vcf(vcfR.trim.80, "~/Dropbox/08_yhpa_072025/yhpa_final_filtered.vcf.gz")
+# vcfR::write.vcf(vcfR.trim.80, "~/Dropbox/08_yhpa_072025/amazona.oratrix.final.filtered.snps.vcf.gz")
 ```
 
 ```{r}
 #load vcf and popmap
-# vcfR.trim.80<-read.vcfR("~/Dropbox/08_yhpa_072025/yhpa_final_filtered.vcf.gz")
+# vcfR.trim.80<-read.vcfR("~/Dropbox/08_yhpa_072025/amazona.oratrix.final.filtered.snps.vcf.gz")
 popmap<-read.csv("~/Dropbox/08_yhpa_072025/yhpa_popmap.csv")
 
 #subset popmap to only include retained individuals
@@ -290,7 +290,7 @@ Eastern MX zoom in
 
 ```{r}
 #load vcf
-vcfR.trim.80<-read.vcfR("~/Dropbox/08_yhpa_072025/yhpa_final_filtered.vcf.gz")
+vcfR.trim.80<-read.vcfR("~/Dropbox/08_yhpa_072025/amazona.oratrix.final.filtered.snps.vcf.gz")
 
 #samples being removed from original vcf after duplicates were removed
 east.vcf<-vcfR.trim.80[, !colnames(vcfR.trim.80@gt) %in% c(
@@ -324,7 +324,7 @@ subspecies_popmap
 
 ```{r}
 #| output: false
-#load in sample data for numbered localities
+#load in sample data for filtered samples with numbered localities
 locality_groups<-read.csv("~/Dropbox/08_yhpa_072025/locality_groups.csv")
 
 popmap_locality<-left_join(subspecies_popmap, locality_groups)
