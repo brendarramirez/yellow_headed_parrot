@@ -6,5 +6,5 @@ Data included in YHPA analyses
 `amazona.oratrix.final.filtered.snps.vcf.gz`
 - All filtered SNPs following the filtering done in `amazona_oratrix_snp_filtering.qmd` (46 samples)
 
-`clean_sample_info.csv`
+`amazona_oratrix_clean_sample_info.csv`
 - Sequencing sample data for each individual
