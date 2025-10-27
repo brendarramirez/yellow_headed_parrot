@@ -43,8 +43,7 @@ mkdir fastp.out
 ```
 
 ### Renaming raw read names
-#### Modern RAPiD genomics samples
-- Changing sequence names to desired sequence names from `amazona_oratrix_clean_sample_info.csv`
+- Changing sequence names to desired sequence names in `amazona_oratrix_clean_sample_info.csv`
 ### Read 1
 ```
 mv combined-RAPiD-Genomics_F432_OCO_184801_P007_WA01_i5-534_i7-59_L001-4_R1_001.fastq.gz ao_ANSP_90568_R1.fastq.gz
