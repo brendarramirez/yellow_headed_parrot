@@ -161,6 +161,7 @@ colnames(subspecies_popmap)<-c("sample_ID", "Country_State")
 subspecies<-left_join(subspecies_popmap, yhpa_occs)
 subspecies$Subspecies[is.na(subspecies$Subspecies)] <- "unknown"
 ```
+
 ### PCA
 ```{r}
 #labeled pca
@@ -201,6 +202,7 @@ ggplot(di.pca.scores, aes(x=PC1, y=PC2)) +
 #        device="svg",
 #        dpi = 400, width = 8, height = 6)
 ```
+
 ### Formatted PCA
 ```{r}
 #formatted pca
@@ -261,6 +263,7 @@ stat_ellipse(
 #        device="svg",
 #        dpi = 400, width = 8, height = 6)
 ```
+
 ### SplitsTree
 ```{r splitstree_80}
 pop(gena)<-gena@ind.names
@@ -352,6 +355,7 @@ rownames(di.pca.east.scores) == popmap$id
 #add in percent variance explained
 var_frac <- di.pca.east$eig/sum(di.pca.east$eig)
 ```
+
 ### Eastern MX PCA
 ```{r}
 #pca
