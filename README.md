@@ -1,7 +1,8 @@
 # Repository for Yellow-headed Parrot Project (in progress)
 
 ### Data Processing
-- [Filtering markdown](https://brendarramirez.github.io/yellow_headed_parrot/amazona_oratrix_snp_filtering.html)
+- [SNP calling[(https://brendarramirez.github.io/yellow_headed_parrot/amazona.oratrix.snp.calling.md): Calling SNPs from our Yellow-headed Parrot Ultra Conserved Element (UCE) sequences
+- [Filtering markdown](https://brendarramirez.github.io/yellow_headed_parrot/amazona_oratrix_snp_filtering.html): Filtering called SNPs to remove outliers and low quality data
 
 ### Locator
-- [Locator markdown](https://brendarramirez.github.io/yellow_headed_parrot/amazona_oratrix_locator.html)
+- [Locator markdown](https://brendarramirez.github.io/yellow_headed_parrot/amazona_oratrix_locator.html): Predicting localities of Yellow-headed Parrots of unknown origin
