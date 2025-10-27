@@ -1,8 +1,8 @@
-# Amazona oratrix SNP calling Pipeline
+# *Amazona oratrix* SNP calling Pipeline
 ### Scripts run on Occidental College's HPC cluster Bletchley
 
 #### Reference genome downloaded from [NCBI](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/039/720/435/GCA_039720435.1_bAmaOch1.hap1/GCA_039720435.1_bAmaOch1.hap1_genomic.fna.gz)
-#### Amazona ochrocephala (yellow-crowned parrot) assemblies - details [here](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_039720435.1/)
+#### *Amazona ochrocephala* (Yellow-crowned Parrot) assemblies - details [here](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_039720435.1/)
 
 #### Download the reference genome directly from NCBI
 - Rename to `ycpa.ref.fna.gz`
