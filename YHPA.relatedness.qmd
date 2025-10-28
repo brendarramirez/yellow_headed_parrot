@@ -1,0 +1,203 @@
+---
+title: "YHPA.relatedness"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+### Load packages and read in unfiltered vcf {style="color: yellow"}
+
+```{r}
+#| output: false
+library(vcfR)
+library(SNPfiltR)
+library(adegenet)
+library(ggplot2)
+library(StAMPP)
+library(pheatmap)
+library(tibble)
+library(tidyr)
+```
+
+```{r}
+x<-read.table("~/Downloads/plink2.kin0")
+hist(x$V6, breaks=100, xlim = c(-2,1))
+hist(x$V6, breaks=100, xlim = c(0,1))
+y<-x[x$V6 > 0.09,]
+
+rev_comp <- x
+rev_comp$V1 <- x$V2
+rev_comp$V2 <- x$V1
+full_comp <- rbind(x, rev_comp)
+full_comp<-full_comp[,c(1,2,6)]
+
+# Include diagonal (self comparisons)
+items <- unique(c(x$V1, x$V2))
+diag_df <- data.frame(V1 = items, V2 = items, V6 = 1)
+full_comp <- rbind(full_comp, diag_df)
+
+# Create matrix
+library(reshape2)
+mat <- dcast(full_comp, V1 ~ V2, value.var = "V6")
+rownames(mat) <- mat$V1
+mat <- mat[,-1]  # remove redundant column
+mat <- as.matrix(mat)
+
+#make heatmap
+heatmap(mat, Rowv = NA, Colv = NA, scale = "none", col = heat.colors(256))
+
+library(ggplot2)
+library(reshape2)
+# Melt for ggplot
+melted <- melt(mat)
+
+ggplot(melted, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradientn(colours = c("black","grey","red"), values = c(0,.83,1),limits=c(-2.5,0.5))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
+  geom_text(aes(label = round(value,2)), color = "black", size = 2)
+
+
+# Set factor levels manually
+melted$Var2<-factor(melted$Var2, levels = c("ao_UMMZ_95618",
+"ao_UMMZ_95619",
+"ao_LSUMZ_43831",
+"ao_LSUMZ_43832",
+"ao_UMMZ_130517",
+"ao_LSUMZ_33050",
+"ao_MLZ_50773",
+"ao_MLZ_50774",
+"ao_MLZ_50775",
+"ao_LSUMZ_39731",
+"ao_MLZ_40634",
+"ao_MLZ_48333",
+"ao_MLZ_41497",
+"ao_MLZ_35920",
+"ao_MLZ_59507",
+"ao_UMMZ_103984",
+"ao_BC_107",
+"ao_BC_108",
+"ao_BC_109",
+"ao_BC_A113",
+"ao_BC_A114",
+"ao_BC_A115",
+"ao_BC_A116",
+"ao_BC_A117",
+"ao_BC_A118",
+"ao_MLZ_70063",
+"ao_MLZ_70074",
+"ao_MLZ_1105",
+"ao_ANSP_90568",
+"ao_LSUMZ_23890",
+"ao_MLZ_32244",
+"ao_MLZ_39530",
+"ao_MLZ_40633",
+"ao_MLZ_40635",
+"ao_MLZ_45517",
+"ao_BC_A112",
+"ao_SP_1",
+"ao_SP_2",
+"ao_SP_3",
+"ao_SP_4",
+"ao_SP_5",
+"ao_SP_6",
+"ao_SP_7",
+"ao_SP_8",
+"ao_SP_831",
+"ao_SP_832",
+"ao_SP_833",
+"ao_SP_834",
+"ao_SP_835",
+"ao_SP_836",
+"ao_SP_837",
+"ao_SP_838",
+"ao_SP_839",
+"ao_SP_840"))
+
+melted$Var1<-factor(melted$Var1, levels = c("ao_UMMZ_95618",
+"ao_UMMZ_95619",
+"ao_LSUMZ_43831",
+"ao_LSUMZ_43832",
+"ao_UMMZ_130517",
+"ao_LSUMZ_33050",
+"ao_MLZ_50773",
+"ao_MLZ_50774",
+"ao_MLZ_50775",
+"ao_LSUMZ_39731",
+"ao_MLZ_40634",
+"ao_MLZ_48333",
+"ao_MLZ_41497",
+"ao_MLZ_35920",
+"ao_MLZ_59507",
+"ao_UMMZ_103984",
+"ao_BC_107",
+"ao_BC_108",
+"ao_BC_109",
+"ao_BC_A113",
+"ao_BC_A114",
+"ao_BC_A115",
+"ao_BC_A116",
+"ao_BC_A117",
+"ao_BC_A118",
+"ao_MLZ_70063",
+"ao_MLZ_70074",
+"ao_MLZ_1105",
+"ao_ANSP_90568",
+"ao_LSUMZ_23890",
+"ao_MLZ_32244",
+"ao_MLZ_39530",
+"ao_MLZ_40633",
+"ao_MLZ_40635",
+"ao_MLZ_45517",
+"ao_BC_A112",
+"ao_SP_1",
+"ao_SP_2",
+"ao_SP_3",
+"ao_SP_4",
+"ao_SP_5",
+"ao_SP_6",
+"ao_SP_7",
+"ao_SP_8",
+"ao_SP_831",
+"ao_SP_832",
+"ao_SP_833",
+"ao_SP_834",
+"ao_SP_835",
+"ao_SP_836",
+"ao_SP_837",
+"ao_SP_838",
+"ao_SP_839",
+"ao_SP_840"))
+
+ggplot(melted, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradientn(colours = c("black","grey","red"), values = c(0,.83,1),limits=c(-2.5,0.5))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
+  geom_text(aes(label = round(value,2)), color = "black", size = 2.5)
+
+ggplot(melted, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradientn(colours = c("black","grey","red"), values = c(0,.83,1),limits=c(-2.5,0.5))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+```
+
+### replot to save
+```{r}
+ggplot(melted, aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradientn(colours = c("black","grey","red"), values = c(0,.83,1),limits=c(-2.5,0.5))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+
+#ggsave(file="~/Desktop/YHPA.relatedness.pdf", units="in",width=8,height=5) #saves g
+```
+

@@ -1,0 +1,77 @@
+---
+title: "YHPA.pairwise.FST"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+### load R packages; read in vcf and sample sheet
+```{r}
+#| output: false
+library(vcfR)
+library(ggplot2)
+library(SNPfiltR)
+library(StAMPP)
+library(adegenet)
+v<-read.vcfR("~/Downloads/yhpa_final_filtered.vcf.gz")
+samps<-read.csv("~/Downloads/Table1.for.manuscript.csv")
+```
+
+
+### remove single auropalliata sample and then calculate FST between groups
+```{r}
+#remove sample
+vsub<-v[,colnames(v@gt) != "ao_LSUMZ_39731"]
+vsub
+#remove invariant SNPs
+vsub<-min_mac(vsub, 1)
+vsub
+#subset sampling file and fix pop IDs
+samps<-samps[samps$sample_ID %in% colnames(vsub@gt),]
+samps[16,5]<-"SoCal"
+samps[17,5]<-"SoCal"
+samps[18,5]<-"SoCal"
+
+#reorder sample file to match vcf
+samps<-samps[match(colnames(vsub@gt)[-1],samps$sample_ID),]
+
+#convert vcfr to geno
+gen<-vcfR2genlight(vsub)
+#assign pops
+pop(gen)<-samps$Subspecies
+#calc FST
+x<-stamppFst(gen)
+#reassign
+m<-x$Fsts
+#fill in upper triangle of matrix
+m[upper.tri(m)] <- t(m)[upper.tri(m)]
+#melt for plotting
+heat <- reshape::melt(m)
+```
+
+### plot
+```{r}
+#reorder factors for plotting
+plot.order<-c("tresmariae","oratrix (west)","oratrix (east)","belizensis","SoCal","unknown")
+heat$X1<-factor(heat$X1, levels=plot.order)
+heat$X2<-factor(heat$X2, levels=plot.order)
+
+#plot with labels
+ggplot(data = heat, aes(x=X1, y=X2, fill=value)) + 
+  geom_tile(color = "black", size=.5)+
+  geom_text(data=heat,aes(label=round(value, 2)), size=2.25)+
+  theme_minimal()+
+  scale_fill_gradient2(low = "white", high = "darkgrey", space = "Lab", name="Fst") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y = element_text(angle = 45, hjust = 1))
+
+#ggsave(file="~/Desktop/YHPA.fst.pdf", units="in",width=4,height=3) #saves g
+
+```
+
+
