@@ -1,0 +1,287 @@
+---
+title: "YHPA.subset.pairwise.FST"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+
+### load R packages; read in vcf and sample sheet
+```{r}
+#| output: false
+library(vcfR)
+library(ggplot2)
+library(SNPfiltR)
+library(StAMPP)
+library(adegenet)
+v<-read.vcfR("~/Downloads/yhpa_final_filtered.vcf.gz")
+samps<-read.csv("~/Downloads/Table1.for.manuscript.csv")
+#make new column
+samps$pop<-samps$Subspecies
+#edit column to reflect north versus south split in eastern Mexico
+samps$pop
+samps$pop[c(42,21,14)]<-"oratrix (southeast)"
+samps$pop[c(15:17)]<-"oratrix (northeast)"
+samps$pop
+```
+
+### remove single auropalliata sample and then calculate FST between all groups
+```{r}
+#remove sample
+vsub<-v[,colnames(v@gt) != "ao_LSUMZ_39731"]
+vsub
+#remove invariant SNPs
+vsub<-min_mac(vsub, 1)
+vsub
+#subset sampling file and fix pop IDs
+samps<-samps[samps$sample_ID %in% colnames(vsub@gt),]
+samps[16,5]<-"SoCal"
+samps[17,5]<-"SoCal"
+samps[18,5]<-"SoCal"
+
+#reorder sample file to match vcf
+samps<-samps[match(colnames(vsub@gt)[-1],samps$sample_ID),]
+
+#convert vcfr to geno
+gen<-vcfR2genlight(vsub)
+#assign pops
+pop(gen)<-samps$Subspecies
+#calc FST
+x<-stamppFst(gen)
+#reassign
+m<-x$Fsts
+#fill in upper triangle of matrix
+m[upper.tri(m)] <- t(m)[upper.tri(m)]
+#melt for plotting
+heat <- reshape::melt(m)
+```
+
+### Now calculate FST with just populations of unknown ancestry plus eastern Mexico separated into north and south populations, plus do 1K random sample assignment replicates of each comparison to put a p-value on each pairwise FST
+```{r, eval=FALSE}
+#make new column
+samps$pop<-samps$Subspecies
+#edit column to reflect north versus south split in eastern Mexico
+samps$pop
+samps$pop[c(42,21,14)]<-"oratrix (southeast)"
+samps$pop[c(15:17)]<-"oratrix (northeast)"
+samps$pop
+
+#set up comparison dataframe
+df<-data.frame(X1=c("oratrix (northeast)","oratrix (southeast)","oratrix (northeast)","oratrix (southeast)"),
+               X2=c("SoCal","SoCal","unknown","unknown"),
+               empirical.Fst=c(rep(NA, times=4)),
+               pval=c(rep(NA, times=4)))
+
+for (j in 1:nrow(df)){
+  #isolate pops of interest
+  vsub2<-vsub[,c(TRUE,samps$pop == df[j,1] | samps$pop == df[j,2])]
+  colnames(vsub2@gt)
+  vsub2
+  
+  #subset sampling file to only these samples
+  samps.sub<-samps[samps$sample_ID %in% colnames(vsub2@gt),]
+  
+  #calculate empirical FST
+  gen<-vcfR2genlight(vsub2)
+  #assign pops
+  pop(gen)<-samps.sub$pop
+  #calc FST
+  x<-stamppFst(gen)
+  #print empirical FST
+  x$Fsts
+  
+  #loop to calculate FST with randomized sample assignment 1K times
+  y<-c() #open empty vector to track results
+  #loop that will randomize sample assignments while maintaining identical sample sizes, and store the resulting information
+    for (i in 1:1000){
+      #assign pops based on random number generator
+      pop(gen)<-samps.sub$Subspecies[sample(1:nrow(samps.sub),size = nrow(samps.sub))]
+      #Calc FST and store value
+      y[i]<-stamppFst(gen)$Fsts[2,1]
+      #inform that this iteration is complete
+      print(paste("iteration",i,"complete"))
+    }
+
+  #calc p-value
+  table(y >= x$Fsts[2,1])
+  mean(y >= x$Fsts[2,1])
+  
+  #make figure
+  plot(density(y),main=paste("1K replicates of randomized sample assignments:\n",df[j,1],"vs.",df[j,2],", p =",round(mean(y >= x$Fsts[2,1]),4)),
+       xlab = "Fst values")
+  polygon(density(y), col = "slateblue1")
+  abline(v=x$Fsts[2,1],lwd=2,lty=2,col="red")
+  
+  #store results in the dataframe
+  df[j,3]<- x$Fsts[2,1] #store Fst
+  df[j,4]<- mean(y >= x$Fsts[2,1]) #store pval
+  
+  #save the results to disk
+  write.csv(y, file=paste0("~/Downloads/",df[j,1],"-",df[j,2],".csv"), row.names = F)
+}
+
+#print the results
+df
+```
+
+### visualize the results of the analysis from the chunk above using the stored data (chunk above only needs to be run once)
+```{r}
+#make new column
+samps$pop<-samps$Subspecies
+#edit column to reflect north versus south split in eastern Mexico
+samps$pop
+samps$pop[c(42,21,14)]<-"oratrix (southeast)"
+samps$pop[c(15:17)]<-"oratrix (northeast)"
+samps$pop
+
+#set up dataframe
+df<-data.frame(X1=c("oratrix (northeast)","oratrix (southeast)","oratrix (northeast)","oratrix (southeast)"),
+               X2=c("SoCal","SoCal","unknown","unknown"),
+               empirical.Fst=c(rep(NA, times=4)),
+               pval=c(rep(NA, times=4)))
+
+for (j in 1:nrow(df)){
+  #isolate pops of interest
+  vsub2<-vsub[,c(TRUE,samps$pop == df[j,1] | samps$pop == df[j,2])]
+  colnames(vsub2@gt)
+  vsub2
+  
+  #subset sampling file to only these samples
+  samps.sub<-samps[samps$sample_ID %in% colnames(vsub2@gt),]
+  
+  #calculate empirical FST
+  gen<-vcfR2genlight(vsub2)
+  #assign pops
+  pop(gen)<-samps.sub$pop
+  #calc FST
+  x<-stamppFst(gen)
+  #print empirical FST
+  x$Fsts
+
+  #read in the precomputed dataframes
+  y<-read.csv(paste0("~/Downloads/",df[j,1],"-",df[j,2],".csv"))
+  y$x<-round(y$x, 8)
+  #make figure
+  plot(density(y$x),main=paste("1K replicates of randomized sample assignments:\n",df[j,1],"vs.",df[j,2],", p =",round(mean(y$x >= round(x$Fsts[2,1],8)),4)),
+       xlab = "Fst values")
+  polygon(density(y$x), col = "slateblue1")
+  abline(v=x$Fsts[2,1],lwd=2,lty=2,col="red")
+  
+  #store results in the dataframe
+  df[j,3]<- x$Fsts[2,1] #store Fst
+  df[j,4]<- round(mean(y$x >= round(x$Fsts[2,1],8)),4) #store pval
+}
+
+#print results
+df
+```
+
+We see that the p-values are not informative for these comparisons because of low sample size. Effectively, with only 3 individuals in each group, there are only 10 unique ways to shuffle the sample assignments. Therefore, ~10% of the time you get the empirically accurate sample assignments, giving you a p-value of 0.10, even though there is no sample assignment scheme that gives you a more extreme Fst value than the empirical one. It would essentially be like flipping a coin 3 times and then asking if there's statistical evidence that it's a weighted coin? Even if you got heads 3 times in a row, the probability of getting that result by random chance is 0.5 x 0.5 x 0.5 which is 0.125, or 12.5%. Essentially there is no outcome that is statistically significant at a threshold of p < 0.05. If you want to test the hypothesis you need greater sample size. For this reason, we chose not to include p-values in this analysis.
+
+
+### Calc pairwise FST and fixed differences and make figure for manuscript
+```{r}
+library(vcfR)
+library(ggplot2)
+library(SNPfiltR)
+library(StAMPP)
+library(adegenet)
+v<-read.vcfR("~/Downloads/yhpa_final_filtered.vcf.gz")
+samps<-read.csv("~/Downloads/Table1.for.manuscript.csv")
+#remove sample
+vsub<-v[,colnames(v@gt) != "ao_LSUMZ_39731"]
+vsub
+#remove invariant SNPs
+vsub<-min_mac(vsub, 1)
+vsub
+#subset sampling file and fix pop IDs
+samps<-samps[samps$sample_ID %in% colnames(vsub@gt),]
+samps[16,5]<-"SoCal"
+samps[17,5]<-"SoCal"
+samps[18,5]<-"SoCal"
+
+#reorder sample file to match vcf
+samps<-samps[match(colnames(vsub@gt)[-1],samps$sample_ID),]
+
+#subset vcf and samps files
+subsamps<-samps[c(13:17,21:42),]
+subsamps$Subspecies[c(2,6,27)]<-"southeast"
+subsamps$Subspecies[c(3,4,5)]<-"northeast"
+
+subvcf<-v[,c(1,15:19,23:44)]
+subvcf
+colnames(subvcf@gt)
+colnames(subvcf@gt)[-1] == subsamps$sample_ID
+
+#convert vcfr to geno
+gen<-vcfR2genlight(subvcf)
+#assign pops
+pop(gen)<-subsamps$Subspecies
+#calc FST
+x<-stamppFst(gen)
+#reassign
+m<-x$Fsts
+#melt for plotting
+heat <- reshape::melt(m)
+#plot with labels
+ggplot(data = heat, aes(x=X1, y=X2, fill=value)) + 
+  geom_tile(colour = "black", linewidth = 0.5)+
+  geom_text(data=heat,aes(label=round(value, 2)))+
+  theme_minimal()+
+  scale_fill_gradient2(low = "white", high = "red", space = "Lab", name="Fst") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y = element_text(angle = 45, hjust = 1))
+
+#identify the number of pairwise fixed differences between pops
+mat<-extract.gt(subvcf)
+conv.mat<-mat
+conv.mat[conv.mat == "0/0"]<-0
+conv.mat[conv.mat == "0/1"]<-1
+conv.mat[conv.mat == "1/1"]<-2
+conv.mat<-as.data.frame(conv.mat)
+#convert to numeric
+for (i in 1:ncol(conv.mat)){
+  conv.mat[,i]<-as.numeric(as.character(conv.mat[,i]))
+}
+
+#show colnames to verify you're subsetting correctly
+colnames(conv.mat) == subsamps$sample_ID
+
+#make vector to fill with fixed diff values
+f<-c()
+
+#write for loop to calc number of fixed diffs between each pop
+for (i in 1:nrow(heat)){
+  #calc af of pop1 and pop2
+  pop1.af<-(rowSums(conv.mat[,subsamps$Subspecies == heat$X1[i]], na.rm=T)/(rowSums(is.na(conv.mat[,subsamps$Subspecies == heat$X1[i]]) == FALSE)))/2
+  pop2.af<-(rowSums(conv.mat[,subsamps$Subspecies == heat$X2[i]], na.rm=T)/(rowSums(is.na(conv.mat[,subsamps$Subspecies == heat$X2[i]]) == FALSE)))/2
+  #store number of fixed differences
+  f[i]<-sum(is.na(abs(pop1.af - pop2.af)) == FALSE & abs(pop1.af - pop2.af) == 1) #find fixed SNPs and add to vector
+}
+
+#add number of fixed diffs to df
+heat$fixed<-f
+
+#fix the assignments
+heat$mixed<-heat$value
+heat$mixed[c(c(5,9,10,13,14,15))]<-heat$fixed[c(5,9,10,13,14,15)]
+
+#plot with labels
+ggplot(data = heat, aes(x=X1, y=X2, fill=value)) + 
+  geom_tile(colour = "black", linewidth = 0.5)+
+  #scale_x_discrete(limits=levels(heat$X2)[c(1,7,2,3,4,5,6)], labels=levels(heat$X1))+ 
+  #scale_y_discrete(limits=levels(heat$X2)[c(1,7,2,3,4,5,6)], labels=levels(heat$X1))+
+  geom_text(data=heat,aes(label=round(mixed, 2)), size=2.5)+
+  theme_minimal()+
+  scale_fill_gradient2(low = "white", high = "red", space = "Lab", name="Fst") +
+  theme(axis.text.x = element_text(angle = 45, vjust=.9, hjust = .9, size=12),
+        axis.text.y = element_text(angle = 45, hjust = 1, size=12),
+        axis.title.x = element_blank(), axis.title.y = element_blank())
+
+```
+
