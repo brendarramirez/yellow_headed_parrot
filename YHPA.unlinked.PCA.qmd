@@ -1,0 +1,101 @@
+---
+title: "YHPA.unlinked.PCA"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+```{r}
+#| output: false
+library(vcfR)
+library(ggplot2)
+library(SNPfiltR)
+library(StAMPP)
+library(adegenet)
+library(dplyr)
+v<-read.vcfR("~/Downloads/yhpa_final_filtered.vcf.gz")
+samps<-read.csv("~/Downloads/Table1.for.manuscript.csv")
+#make new column
+samps$pop<-samps$Subspecies
+#subset sampling file and fix pop IDs
+samps<-samps[samps$sample_ID %in% colnames(v@gt),]
+popmap<-samps
+```
+
+```{r}
+#labeled pca
+#convert each to genlight
+gena<-vcfR2genlight(v)
+#perform PCA
+di.pca<-glPca(gena, nf=4)
+#isolate PCA scores as a dataframe
+di.pca.scores<-as.data.frame(di.pca$scores)
+#check if sample order matches in vcf versus sampling table
+rownames(di.pca.scores) == popmap$sample_ID 
+#reorder sampling file to match alphabetical order
+popmap<-popmap %>% slice(order(factor(sample_ID, levels = rownames(di.pca.scores))))
+#check that they all match
+rownames(di.pca.scores) == popmap$sample_ID 
+#add in subspecies labels
+di.pca.scores$Subspecies<-popmap$Subspecies
+#add in percent variance explained
+var_frac <- di.pca$eig/sum(di.pca$eig)
+# pca<-
+ggplot(di.pca.scores, aes(x=PC1, y=PC2)) +
+  geom_point(aes(fill=Subspecies), pch=21, size=4) +
+   scale_fill_manual(
+    values = c(
+      "auropalliata" = "#fff700", 
+      "belizensis"  = "#ff99fd",
+      # "hondurensis" = "#a76d00",
+      "oratrix (east)" = "#ffab00",
+      "oratrix (west)" = "#1E90FF",
+      "tresmariae" = "#F75394",
+      "unknown" = "#008B8B"
+  )) +
+  xlab(paste0("PC1, ", round(var_frac[1] * 100, 2), "% variance explained")) + 
+  ylab(paste0("PC2, ", round(var_frac[2] * 100, 2), "% variance explained")) + 
+  theme_classic() + 
+  labs(fill = "Subspecies")
+```
+
+### repeat with the thinned SNP dataset
+```{r}
+v.thin<-distance_thin(v,1000)
+v.thin
+#labeled pca
+#convert each to genlight
+gena<-vcfR2genlight(v.thin)
+#perform PCA
+di.pca<-glPca(gena, nf=4)
+#isolate PCA scores as a dataframe
+di.pca.scores<-as.data.frame(di.pca$scores)
+#add in subspecies labels
+di.pca.scores$Subspecies<-popmap$Subspecies
+#add in percent variance explained
+var_frac <- di.pca$eig/sum(di.pca$eig)
+# pca<-
+ggplot(di.pca.scores, aes(x=PC1, y=PC2)) +
+  geom_point(aes(fill=Subspecies), pch=21, size=4) +
+   scale_fill_manual(
+    values = c(
+      "auropalliata" = "#fff700", 
+      "belizensis"  = "#ff99fd",
+      # "hondurensis" = "#a76d00",
+      "oratrix (east)" = "#ffab00",
+      "oratrix (west)" = "#1E90FF",
+      "tresmariae" = "#F75394",
+      "unknown" = "#008B8B"
+  )) +
+  xlab(paste0("PC1, ", round(var_frac[1] * 100, 2), "% variance explained")) + 
+  ylab(paste0("PC2, ", round(var_frac[2] * 100, 2), "% variance explained")) + 
+  theme_classic() + 
+  labs(fill = "Subspecies")
+
+```
+
