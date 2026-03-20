@@ -12,3 +12,4 @@
 ### Quantifying pairwise relatedness
 - [Calculating pairwise Fst between major lineages](https://brendarramirez.github.io/yellow_headed_parrot/YHPA.pairwise.fst.html)
 - [Calculating pairwise kinship matrix among all samples](https://brendarramirez.github.io/yellow_headed_parrot/YHPA.relatedness.html)
+- [Calculating pairwise Fst and fixed differences to identify fine-scale structure](https://brendarramirez.github.io/yellow_headed_parrot/yhpa.subset.fst.fixed.diffs.html)
