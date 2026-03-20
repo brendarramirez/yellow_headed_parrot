@@ -14,3 +14,4 @@
 - [Calculating pairwise kinship matrix among all samples](https://brendarramirez.github.io/yellow_headed_parrot/YHPA.relatedness.html)
 - [Calculating pairwise Fst and fixed differences to identify fine-scale structure](https://brendarramirez.github.io/yellow_headed_parrot/yhpa.subset.fst.fixed.diffs.html)
 - [Randomization procedure to calculate p-values associated with pairwise FST comparisons](https://brendarramirez.github.io/yellow_headed_parrot/FST.pvalue.randomization.html)
+- [Comparing linked to unlinked SNPs for PCA making (Fig. S2)](https://brendarramirez.github.io/yellow_headed_parrot/YHPA.unlinked.PCA.html)
