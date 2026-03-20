@@ -1,0 +1,183 @@
+---
+title: "YHPA.FST.pvalues.via.randomization"
+format:
+  html:
+    code-fold: show
+    code-tools: true
+toc: true
+toc-title: Document Contents
+number-sections: true
+embed-resources: true
+---
+
+### load R packages; read in vcf and sample sheet
+```{r}
+#| output: false
+library(vcfR)
+library(ggplot2)
+library(SNPfiltR)
+library(StAMPP)
+library(adegenet)
+v<-read.vcfR("~/Downloads/yhpa_final_filtered.vcf.gz")
+samps<-read.csv("~/Downloads/Table1.for.manuscript.csv")
+#make new column
+samps[16,5]<-"SoCal"
+samps[17,5]<-"SoCal"
+samps[18,5]<-"SoCal"
+samps$pop<-samps$Subspecies
+```
+
+### remove single auropalliata sample and then calculate FST between groups
+```{r}
+#remove sample
+vsub<-v[,colnames(v@gt) != "ao_LSUMZ_39731"]
+vsub
+#remove invariant SNPs
+vsub<-min_mac(vsub, 1)
+vsub
+#subset sampling file and fix pop IDs
+samps<-samps[samps$sample_ID %in% colnames(vsub@gt),]
+samps[16,5]<-"SoCal"
+samps[17,5]<-"SoCal"
+samps[18,5]<-"SoCal"
+
+#reorder sample file to match vcf
+samps<-samps[match(colnames(vsub@gt)[-1],samps$sample_ID),]
+
+#convert vcfr to geno
+gen<-vcfR2genlight(vsub)
+#assign pops
+pop(gen)<-samps$Subspecies
+#calc FST
+x<-stamppFst(gen)
+#reassign
+m<-x$Fsts
+#fill in upper triangle of matrix
+m[upper.tri(m)] <- t(m)[upper.tri(m)]
+#melt for plotting
+heat <- reshape::melt(m)
+```
+
+### plot pairwise FST
+```{r}
+#reorder factors for plotting
+plot.order<-c("tresmariae","oratrix (west)","oratrix (east)","belizensis","SoCal","unknown")
+heat$X1<-factor(heat$X1, levels=plot.order)
+heat$X2<-factor(heat$X2, levels=plot.order)
+
+#plot with labels
+ggplot(data = heat, aes(x=X1, y=X2, fill=value)) + 
+  geom_tile(color = "black", size=.5)+
+  geom_text(data=heat,aes(label=round(value, 2)), size=2.25)+
+  theme_minimal()+
+  scale_fill_gradient2(low = "white", high = "darkgrey", space = "Lab", name="Fst") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        axis.text.y = element_text(angle = 45, hjust = 1))
+
+#ggsave(file="~/Desktop/YHPA.fst.pdf", units="in",width=4,height=3) #saves g
+
+```
+
+
+### use a loop to calculate the p-value associated with each pairwise Fst comparison based on 1K permutations
+```{r, eval=FALSE}
+#set up comparison dataframe
+df<-data.frame(X1=c("oratrix (west)","oratrix (east)","belizensis","SoCal","unknown","oratrix (east)","belizensis","SoCal","unknown","belizensis","SoCal","unknown","SoCal","unknown","unknown"),
+               X2=c("tresmariae","tresmariae","tresmariae","tresmariae","tresmariae","oratrix (west)","oratrix (west)","oratrix (west)","oratrix (west)","oratrix (east)","oratrix (east)","oratrix (east)","belizensis","belizensis","SoCal"),
+               empirical.Fst=c(rep(NA, times=15)),
+               pval=c(rep(NA, times=15)))
+
+for (j in 12:nrow(df)){
+  #isolate pops of interest
+  vsub2<-vsub[,c(TRUE,samps$Subspecies == df[j,1] | samps$Subspecies == df[j,2])]
+  colnames(vsub2@gt)
+  vsub2
+  
+  #subset sampling file to only these samples
+  samps.sub<-samps[samps$sample_ID %in% colnames(vsub2@gt),]
+  
+  #calculate empirical FST
+  gen<-vcfR2genlight(vsub2)
+  #assign pops
+  pop(gen)<-samps.sub$Subspecies
+  #calc FST
+  x<-stamppFst(gen)
+  #print empirical FST
+  x$Fsts
+  
+  #loop to calculate FST with randomized sample assignment 1K times
+  y<-c() #open empty vector to track results
+  #loop that will randomize sample assignments while maintaining identical sample sizes, and store the resulting information
+    for (i in 1:1000){
+      #assign pops based on random number generator
+      pop(gen)<-samps.sub$Subspecies[sample(1:nrow(samps.sub),size = nrow(samps.sub))]
+      #Calc FST and store value
+      y[i]<-stamppFst(gen)$Fsts[2,1]
+      #inform that this iteration is complete
+      #print(paste("iteration",i,"complete"))
+    }
+
+  #calc p-value
+  table(y >= x$Fsts[2,1])
+  mean(y >= x$Fsts[2,1])
+  
+  #make figure
+  plot(density(y),main=paste("1K replicates of randomized sample assignments:\n",df[j,1],"vs.",df[j,2],", p =",round(mean(y >= x$Fsts[2,1]),4)),
+       xlab = "Fst values")
+  polygon(density(y), col = "slateblue1")
+  abline(v=x$Fsts[2,1],lwd=2,lty=2,col="red")
+  
+  #store results in the dataframe
+  df[j,3]<- x$Fsts[2,1] #store Fst
+  df[j,4]<- mean(y >= x$Fsts[2,1]) #store pval
+
+  #save the results to disk
+  write.csv(y, file=paste0("~/Downloads/",df[j,1],"versus",df[j,2],".csv"), row.names = F)
+}
+
+#print the results
+df
+```
+
+### re-run the analysis using stored data (above chunk only needs to be run once)
+```{r}
+#set up comparison dataframe
+df<-data.frame(X1=c("oratrix (west)","oratrix (east)","belizensis","SoCal","unknown","oratrix (east)","belizensis","SoCal","unknown","belizensis","SoCal","unknown","SoCal","unknown","unknown"),
+               X2=c("tresmariae","tresmariae","tresmariae","tresmariae","tresmariae","oratrix (west)","oratrix (west)","oratrix (west)","oratrix (west)","oratrix (east)","oratrix (east)","oratrix (east)","belizensis","belizensis","SoCal"),
+               empirical.Fst=c(rep(NA, times=15)),
+               pval=c(rep(NA, times=15)))
+
+for (j in 1:nrow(df)){
+  #isolate pops of interest
+  vsub2<-vsub[,c(TRUE,samps$pop == df[j,1] | samps$pop == df[j,2])]
+  colnames(vsub2@gt)
+  vsub2
+  
+  #subset sampling file to only these samples
+  samps.sub<-samps[samps$sample_ID %in% colnames(vsub2@gt),]
+  
+  #calculate empirical FST
+  gen<-vcfR2genlight(vsub2)
+  #assign pops
+  pop(gen)<-samps.sub$pop
+  #calc FST
+  x<-stamppFst(gen)
+  #print empirical FST
+  x$Fsts
+
+  #read in the precomputed dataframes
+  y<-read.csv(paste0("~/Downloads/",df[j,1],"versus",df[j,2],".csv"))
+  y$x<-round(y$x, 8)
+  #make figure
+  plot(density(y$x),main=paste("1K replicates of randomized sample assignments:\n",df[j,1],"vs.",df[j,2],", p =",round(mean(y$x >= round(x$Fsts[2,1],8)),4)),
+       xlab = "Fst values")
+  polygon(density(y$x), col = "slateblue1")
+  abline(v=x$Fsts[2,1],lwd=2,lty=2,col="red")
+  
+  #store results in the dataframe
+  df[j,3]<- x$Fsts[2,1] #store Fst
+  df[j,4]<- round(mean(y$x >= round(x$Fsts[2,1],8)),4) #store pval
+}
+```
+
+Because these FST values often just reflect sample size (e.g., comparisons with tresmariae are coming out with high p-values because small sample size in that population makes the probability of getting the accurate empirical sample assignments in the randomization procedure quite high - despite the fact that it is actually the most divergent population!) we chose not to include p-values in this manuscript.
