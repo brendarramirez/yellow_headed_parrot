@@ -42,7 +42,7 @@ vcfR <- read.vcfR("~/Dropbox/08_yhpa_072025/amazona.oratrix.unfiltered.snps.vcf.
 ```{r matching_sample_names}
 vcfR
 
-sample.info<-read.csv("~/Dropbox/08_yhpa_072025/clean_sample_info.csv")
+sample.info<-read.csv("~/Dropbox/08_yhpa_072025/amazona_oratrix_clean_sample_info.csv")
 
 #check vcf colnames
 colnames(vcfR@gt)
