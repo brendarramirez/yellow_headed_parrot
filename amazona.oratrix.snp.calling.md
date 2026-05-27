@@ -1,4 +1,4 @@
-# SNP Calling Pipeline for Unlocking the Past to Protect the Future: Forensic DNA and Historical Specimens Reveal the Origins of Smuggled Yellow-headed Parrots
+# YHPA SNP Calling
 
 #### Reference genome downloaded from [ncbi](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/039/720/435/GCA_039720435.1_bAmaOch1.hap1/GCA_039720435.1_bAmaOch1.hap1_genomic.fna.gz)
 #### Amazona ochrocephala (yellow-crowned parrot) assemblies - details [here](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_039720435.1/)
