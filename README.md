@@ -1,4 +1,4 @@
-# Unlocking the Past to Protect the Future: Forensic DNA and Historical Specimens Reveal the Origins of Smuggled Yellow-headed Parrots
+# [Unlocking the Past to Protect the Future: Forensic DNA and Historical Specimens Reveal the Origins of Smuggled Yellow-headed Parrots](https://doi.org/10.1111/eva.70282)
 
 ### Lead author Brenda Ramirez (brendarosaramirez@gmail.com)
 
